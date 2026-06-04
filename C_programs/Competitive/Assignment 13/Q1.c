@@ -1,16 +1,35 @@
 #include<stdio.h>
-int Diffrence(int Arr[], int iLength)
+#include<stdlib.h>
+int Diffrence(int Arr[], int iSize)
 {
-    
+    int iCnt = 0, iDiff = 0;
+    int iSumEven = 0;
+    int iSumOdd = 0;
+    printf("Elements of array are : \n");
+
+    for(iCnt = 0; iCnt < iSize; iCnt++)
+    {   
+        if(Arr[iCnt] % 2 == 0)
+        {
+            iSumEven = iSumEven + Arr[iCnt];
+        }
+        else if(Arr[iCnt] % 2 != 0)
+        {
+            iSumOdd = iSumOdd + Arr[iCnt];
+        }
+    }
+        iDiff = iSumEven - iSumOdd;
+        return iDiff;
+
 }
 int main()
 {
-    int iSize = 0, iRet = 0,iCnt = 0;
+    int iLength = 0, iRet = 0,iCnt = 0;
     int *brr = NULL;
     printf("Enter Number of Elements : ");
-    scanf("%d",&iSize);
+    scanf("%d",&iLength);
 
-    brr = (int *)malloc(iSize * sizeof(int));
+    brr = (int *)malloc(iLength* sizeof(int));
 
     if(brr == NULL)
     {
@@ -18,14 +37,13 @@ int main()
         return -1;
     }
 
-    printf("Enter %d elements",iLength);
     for(iCnt = 0; iCnt < iLength; iCnt++)
     {
-        printf("Enter elements : %d", iCnt+1);
         scanf("%d", &brr[iCnt]);
     }
 
-    iRet = Diffrence(brr, iSize);
+    iRet = Diffrence(brr, iLength);
     printf("Result is : %d", iRet);
+    free(brr);
     return 0;
 }
