@@ -5,7 +5,6 @@
 void Range(int Arr[], int iSize, int iStart, int iEnd)
 {
     int iCnt = 0;
-    int iPos = -1;
     for(iCnt = 0; iCnt < iSize; iCnt++)
     {
         if(Arr[iCnt] > iStart && Arr[iCnt] < iEnd)
