@@ -27,6 +27,6 @@ public class program145
         {
            System.out.println(Brr[iCnt]);
         }
-
+        sobj.close();
     }
 }

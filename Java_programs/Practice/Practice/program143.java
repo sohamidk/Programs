@@ -16,8 +16,6 @@ class program143
     {
        
         Scanner sobj = new Scanner(System.in);
-
-        
         int iCnt = 0;
        
         System.out.println("Enter the number of elements : ");

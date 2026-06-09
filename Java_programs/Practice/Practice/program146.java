@@ -30,6 +30,7 @@ public class program146
         {
            System.out.println(Brr[iCnt]);
         }
+        sobj.close();
 
     }
 }
