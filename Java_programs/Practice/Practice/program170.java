@@ -58,11 +58,11 @@ class program170
         Brr = new int[iLength];
 
         ArrayX aobj = new ArrayX(iLength);
+        aobj.Accept();
+        aobj.Display();
         int iRet = 0;
         iRet = aobj.Summation();
         System.out.println("Summation is : " + iRet);
-        aobj.Accept();
-        aobj.Display();
 
         System.gc();
 
