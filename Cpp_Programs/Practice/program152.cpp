@@ -2,6 +2,7 @@
 using namespace std;
 class ArrayX
 {
+    public:
     int Summation(int Arr[], int iSize)
     {
         int iCnt = 0;
