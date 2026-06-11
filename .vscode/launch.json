@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "p17_1",
+            "request": "launch",
+            "mainClass": "p17_1",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
