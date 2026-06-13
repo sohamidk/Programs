@@ -9,7 +9,7 @@ class Logic
             iDigit = iNo % 10;
              if(iDigit < iSmall)
             {
-                iSmall  = iDigit; 
+                iSmall  = iDigit;   
             }
             iNo = iNo / 10;
         }
