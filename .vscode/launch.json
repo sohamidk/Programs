@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "p20_1",
+            "request": "launch",
+            "mainClass": "p20_1",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
             "name": "program188",
             "request": "launch",
             "mainClass": "program188",
