@@ -6,6 +6,174 @@
     "configurations": [
         {
             "type": "java",
+            "name": "program188",
+            "request": "launch",
+            "mainClass": "program188",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program196",
+            "request": "launch",
+            "mainClass": "program196",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program195",
+            "request": "launch",
+            "mainClass": "program195",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program194",
+            "request": "launch",
+            "mainClass": "program194",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program193",
+            "request": "launch",
+            "mainClass": "program193",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program192",
+            "request": "launch",
+            "mainClass": "program192",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program191",
+            "request": "launch",
+            "mainClass": "program191",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program190",
+            "request": "launch",
+            "mainClass": "program190",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program189",
+            "request": "launch",
+            "mainClass": "program189",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program187",
+            "request": "launch",
+            "mainClass": "program187",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program186",
+            "request": "launch",
+            "mainClass": "program186",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program185",
+            "request": "launch",
+            "mainClass": "program185",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program184",
+            "request": "launch",
+            "mainClass": "program184",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program183",
+            "request": "launch",
+            "mainClass": "program183",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program182",
+            "request": "launch",
+            "mainClass": "program182",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program181",
+            "request": "launch",
+            "mainClass": "program181",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program180",
+            "request": "launch",
+            "mainClass": "program180",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program179",
+            "request": "launch",
+            "mainClass": "program179",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program178",
+            "request": "launch",
+            "mainClass": "program178",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program177",
+            "request": "launch",
+            "mainClass": "program177",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program176",
+            "request": "launch",
+            "mainClass": "program176",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program175",
+            "request": "launch",
+            "mainClass": "program175",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program174",
+            "request": "launch",
+            "mainClass": "program174",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
+            "name": "program173",
+            "request": "launch",
+            "mainClass": "program173",
+            "projectName": "Programs_98459fd8"
+        },
+        {
+            "type": "java",
             "name": "p17_1",
             "request": "launch",
             "mainClass": "p17_1",

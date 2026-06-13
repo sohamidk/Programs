@@ -65,6 +65,8 @@ class program170
         System.out.println("Summation is : " + iRet);
 
         System.gc();
+        sobj.close();
+
 
     }
 
