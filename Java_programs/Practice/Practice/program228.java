@@ -34,7 +34,7 @@ class Pattern
         }
     }
 }
-class program226
+class program228
 {
     
     public static void main(String a[])
