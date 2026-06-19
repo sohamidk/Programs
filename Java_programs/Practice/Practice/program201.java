@@ -33,6 +33,6 @@ public class program201 {
 
         Pattern pobj = new Pattern();
         pobj.Display(iValue1, iValue2);
-
+        sobj.close();
     }
 }

@@ -2,11 +2,11 @@
     iRow = 4
     iCol = 4
     
-    $   $   $   $   
-    #   #   #   #   
-    $   $   $   $   
-    #   #   #   #   
-
+    a   b   c   d
+    a   b   c   d
+    a   b   c   d
+    a   b   c   d
+    
 */
 
 import java.util.*;
@@ -16,20 +16,20 @@ class Pattern
     public void Display(int iRow, int iCol)
     {
         int i = 0, j = 0;
-        char Arr[] = {'#', '$'};
+        char ch = '\0';
 
         for(i = 1; i <= iRow; i++)
         {
-            for(j = 1; j <= iCol; j++)
+            for(j = 1, ch = 97; j <= iCol; j++, ch++)
             {
-                System.out.print(Arr[i%2]+"\t");
+                System.out.print(ch+"\t");
             }
             System.out.println();
         }
     }
 }
 
-class program202
+class program205
 {
     public static void main(String A[])
     {
