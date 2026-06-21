@@ -6,6 +6,48 @@
     "configurations": [
         {
             "type": "java",
+            "name": "program265",
+            "request": "launch",
+            "mainClass": "program265",
+            "projectName": "Programs_3a4ba226"
+        },
+        {
+            "type": "java",
+            "name": "program264",
+            "request": "launch",
+            "mainClass": "program264",
+            "projectName": "Programs_3a4ba226"
+        },
+        {
+            "type": "java",
+            "name": "program263",
+            "request": "launch",
+            "mainClass": "program263",
+            "projectName": "Programs_3a4ba226"
+        },
+        {
+            "type": "java",
+            "name": "program262",
+            "request": "launch",
+            "mainClass": "program262",
+            "projectName": "Programs_3a4ba226"
+        },
+        {
+            "type": "java",
+            "name": "program261",
+            "request": "launch",
+            "mainClass": "program261",
+            "projectName": "Programs_3a4ba226"
+        },
+        {
+            "type": "java",
+            "name": "program260",
+            "request": "launch",
+            "mainClass": "program260",
+            "projectName": "Programs_3a4ba226"
+        },
+        {
+            "type": "java",
             "name": "program219",
             "request": "launch",
             "mainClass": "program219",
