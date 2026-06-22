@@ -9,7 +9,7 @@ class program277
         
         int iRet = 0;
         String data = null;
-        StringX strobj = new StringX();     
+        program280 strobj = new program280();     
         
 
         System.out.println("Enter string : ");
