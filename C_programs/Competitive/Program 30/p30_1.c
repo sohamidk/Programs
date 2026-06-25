@@ -7,6 +7,7 @@ void DisplayASCII()
         printf("%c\t",ch);
         ch++;
     }
+    printf("\n");
 }
 int main()
 {
