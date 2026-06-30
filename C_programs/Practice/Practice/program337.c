@@ -2,7 +2,7 @@
 
 typedef unsigned int UINT;
 
-//POSITION OF BIT IS 13
+//POSITION OF BIT IS 4
 int main()
 {
     UINT iMask = 0xFFFFFFF7;
