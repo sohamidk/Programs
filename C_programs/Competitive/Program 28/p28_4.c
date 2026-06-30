@@ -16,9 +16,13 @@ void Pattern(int iRow, int iCol)
            {
             printf("*\t");
            }
-           else if(i >= j || i < j)
+           else if(i > j)
            {
-            printf("\t");
+            printf("$\t");
+           }
+           else if(j > i)
+           {
+            printf("#\t");
            }
         }
         printf("\n");

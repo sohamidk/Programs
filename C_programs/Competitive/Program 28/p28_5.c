@@ -10,11 +10,11 @@ void Pattern(int iRow, int iCol)
     }
     for(i = 1; i<= iRow; i++)
     {
-        for(j = iCol; j>=1; j--)
+        for(j = 1; j<=iCol; j++)
         {
            if(i == j || j == 1|| j == iCol || i == 1 || i == iRow)
            {
-            printf("*\t");
+            printf("%d\t",j);
            }
            else if(i >= j || i < j)
            {
