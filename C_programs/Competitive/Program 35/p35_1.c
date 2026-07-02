@@ -3,11 +3,12 @@
 #define TRUE 1
 #define FALSE 0
 
+typedef unsigned int UNIT;
 typedef int BOOL;
-BOOL ChkBit(int iNo)
+BOOL ChkBit(UNIT iNo)
 {
-    int iMask = 0x4000;     //15th bit
-    int iAns = 0;
+    UNIT iMask = 0x4000;     //15th bit
+    UNIT iAns = 0;
 
     iAns = iNo & iMask;
 
