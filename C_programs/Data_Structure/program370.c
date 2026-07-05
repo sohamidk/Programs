@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+//template of linked list functions
 #pragma pack(1)
 
 struct node
