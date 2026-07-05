@@ -42,7 +42,8 @@ void InsertFirsrt(PPNODE first, int iNo)
 
     newn->data = iNo;
     newn->next = NULL;
-    //error
+
+    //ERROR
     if(NULL = *first)  //LL is empty
     {
         *first = newn;
