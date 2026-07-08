@@ -184,7 +184,9 @@ void DeleteLast(PPNODE first)
 void DeleteAtPos(PPNODE first, int iPos)
 {
     int iCount = 0;
+    int i = 0;
     iCount = Count(*first);
+    PNODE temp = NULL;
 
     if((iPos < 1) || (iPos > iCount))
     {
@@ -202,7 +204,15 @@ void DeleteAtPos(PPNODE first, int iPos)
     }
     else
     {
-        
+        temp = *first;
+
+        for(i = 1; i < iPos - 1; i++)
+        {
+            temp = temp->next;
+        }
+        temp->next = temp->next->next;      //400 to 600
+        free(temp->next->prev);     //free 500 (previous because we assign 400 to 600)
+        temp->next->prev = temp;       //500 erase houn 400 aala
 
     }
 }
@@ -245,6 +255,12 @@ int main()
     Display(head);
     iRet = Count(head);
     printf("Number of Nodes are :%d\n",iRet);
+
+    DeleteAtPos(&head,4);
+    Display(head);
+    iRet = Count(head);
+    printf("Number of Nodes are :%d\n",iRet);
+
     
     return 0;
 }
