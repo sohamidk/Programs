@@ -10,7 +10,7 @@ void strrevX(char *str)
         str++;
     }
     str--;      //to remove space
-    end = start;
+    end = str;
     while(start <= end)
     {
         temp = *start;

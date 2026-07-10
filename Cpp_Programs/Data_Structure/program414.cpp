@@ -3,6 +3,7 @@ using namespace std;
 #pragma pack(1)
 
 //Singly linear LL
+//Menu Driven
 struct node
 {
     int data;
@@ -236,47 +237,91 @@ void SinglyLL :: DeleteAtPos(int iPos)
 
 int main()
 {
-    int iRet = 0;
     SinglyLL sobj;
 
-    sobj.InsertFirst(51);
-    sobj.InsertFirst(21);
-    sobj.InsertFirst(11);
+    int iChoice = 0;
+    int iValue = 0;
+    int iRet = 0;
+    int iPosition = 0;
 
-    sobj.Display();
-    iRet = sobj.Count();
-    cout<<"No. of Nodes : "<<iRet<<endl;
+    while(iChoice != 9)
+    {
+        cout<<"_______________________________________\n";
+        cout<<"Enter Your Choice : \n";
+        cout<<"_______________________________________\n";
 
-    sobj.InsertLast(101);
-    sobj.InsertLast(111);
-    sobj.InsertLast(121);
+        cout<<"1 : Insert node at first position  \n";
+        cout<<"2 : Insert node at Last position  \n";
+        cout<<"3 : Insert node at given position  \n";
 
-    sobj.Display();
-    iRet = sobj.Count();
-    cout<<"No. of Nodes : "<<iRet<<endl;
+        cout<<"4 : Delete node at first position  \n";
+        cout<<"5 : Delete node at Last position  \n";
+        cout<<"6 : Delete node at given position  \n";
 
-    sobj.DeleteFirst();
+        cout<<"7 : Display nodes  \n";
+        cout<<"8 : Count of the nodes  \n";
+        cout<<"9 : Terminate the application  \n";
+        cout<<"____________________________________________\n";
+        cin>>iChoice;
+
+        switch(iChoice)
+        {
+            case 1:
+                cout<<"Enter the Value : \n";
+                cin>>iValue;
+                sobj.InsertFirst(iValue);
+            break;
+
+            case 2:
+                cout<<"Enter the Value : \n";
+                cin>>iValue;
+                sobj.InsertLast(iValue);
+            break;
+
+            case 3:
+                cout<<"Enter the Value : \n";
+                cin>>iValue;
+                cout<<"Enter the Position : \n";
+                cin>>iPosition;
+                sobj.InsertAtPos(iValue,iPosition);
+            break;
+
+            case 4:
+                sobj.DeleteFirst();
+            break;
+
+            case 5:
+                sobj.DeleteLast();
+            break;
+
+            case 6:
+                cout<<"Enter the Position : \n";
+                cin>>iPosition;
+                sobj.DeleteAtPos(iPosition);
+            break;
+
+            case 7:
+                cout<<"Elements of the Linked List are : \n";
+                sobj.Display();
+            break;
+
+            case 8:
+                iRet = sobj.Count();
+                cout<<"Numbers of Nodes of the Linked List are : \n"<<iRet<<endl;
+            break;
+
+            case 9:
+                cout<<"Thank You for Using Marvellous Infosysytem's Application";
+            break;
+
+            default : 
+                cout<<"Invalid Choice\n";
+            break;
+        }
+    }
     
-    sobj.Display();
-    iRet = sobj.Count();
-    cout<<"No. of Nodes : "<<iRet<<endl;
 
-    sobj.DeleteLast();
 
-    sobj.Display();
-    iRet = sobj.Count();
-    cout<<"No. of Nodes : "<<iRet<<endl;
-
-    sobj.InsertAtPos(105,4);
-
-    sobj.Display();
-    iRet = sobj.Count();
-    cout<<"No. of Nodes : "<<iRet<<endl;
-
-    sobj.DeleteAtPos(4);
-    sobj.Display();
-    iRet = sobj.Count();
-    cout<<"No. of Nodes : "<<iRet<<endl;
 
     return 0;
 
