@@ -13,6 +13,8 @@ typedef struct node NODE;
 typedef struct node * PNODE;
 typedef struct node ** PPNODE;
 
+
+
 void Display(PNODE first , PNODE last)
 {
     if(first == NULL && last == NULL)
@@ -31,6 +33,8 @@ void Display(PNODE first , PNODE last)
     printf("\n");
 }
 
+
+
 int Count(PNODE first, PNODE last)
 {
     int iCount = 0;
@@ -48,6 +52,8 @@ int Count(PNODE first, PNODE last)
 
     return iCount;
 }
+
+
 
 void InsertFirst(PPNODE first, PPNODE last, int iNo)
 {
@@ -70,6 +76,8 @@ void InsertFirst(PPNODE first, PPNODE last, int iNo)
     (*last)->next = *first;
 }
 
+
+
 void InsertLast(PPNODE first, PPNODE last, int iNo)
 {
     PNODE newn = NULL;             
@@ -90,6 +98,8 @@ void InsertLast(PPNODE first, PPNODE last, int iNo)
     }
     (*last)->next = *first;     //imp
 }
+
+
 
 void InsertAtPos(PPNODE first, PPNODE last, int iNo, int iPos)
 {
@@ -133,6 +143,8 @@ void InsertAtPos(PPNODE first, PPNODE last, int iNo, int iPos)
 
 }
 
+
+
 void DeleteFirst(PPNODE first, PPNODE last)
 {
     if(*first == NULL && *last == NULL)
@@ -153,6 +165,8 @@ void DeleteFirst(PPNODE first, PPNODE last)
     }
   
 }
+
+
 
 void DeleteLast(PPNODE first, PPNODE last)
 {
@@ -180,6 +194,8 @@ void DeleteLast(PPNODE first, PPNODE last)
         (*last)->next = *first;
     }
 }
+
+
 
 void DeleteAtPos(PPNODE first,PPNODE last, int iPos)
 {
@@ -261,5 +277,7 @@ int main()
     Display(head,tail);
     iRet = Count(head,tail);
     printf("Number of nodes are : %d\n",iRet);
+
+
     return 0;
 }
