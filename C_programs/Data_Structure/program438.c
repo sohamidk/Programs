@@ -35,7 +35,20 @@ void Display(PNODE first,PNODE last)
 
 int Count(PNODE first,PNODE last)
 {
-    return 0;
+    int iCount = 0;
+    if((first == NULL) && (last == NULL))
+    {
+        return 0;
+    }
+
+    
+    do
+    {
+        iCount++;
+        first = first->next;
+    } while (first != last->next);
+
+    return iCount;
 }
 
 void InsertFirst(PPNODE first, PPNODE last,int iNo)
@@ -98,14 +111,48 @@ void InsertAtPos(PPNODE first, PPNODE last,int iNo,int iPos)
 
 void DeleteFirst(PPNODE first, PPNODE last)
 {
-    
+    if(*first == NULL && *last == NULL)
+    {
+        return;
+    }
+    else if (*first == *last)
+    {
+        free(*first);
+        *first = NULL;
+        *last = NULL;
+    }
+    else
+    {
+        *first = (*first)->next;
+        free((*first)->prev);
+
+        (*last)->next = *first;
+        (*first)->prev = *last;
+    }
+
 }
 
 
 void DeleteLast(PPNODE first, PPNODE last)
 {
+    if(*first == NULL && *last == NULL)
+    {
+        return;
+    }
+    else if (*first == *last)
+    {
+        free(*first);
+        *first = NULL;
+        *last = NULL;
+    }
+    else
+    {
+        *last = (*last)->prev;
+        free((*last)->next);
+    }
 
-
+    (*last)->next = *first;
+    (*first)->prev = *last;
 }
 
 void DeleteAtPos(PPNODE first, PPNODE last, int iPos)
@@ -116,6 +163,7 @@ void DeleteAtPos(PPNODE first, PPNODE last, int iPos)
 
 int main()
 {
+    int iRet = 0;
     PNODE head = NULL;
     PNODE tail = NULL;
 
@@ -128,5 +176,22 @@ int main()
     InsertLast(&head,&tail,121);
 
     Display(head,tail);
+    iRet = Count(head,tail);
+    printf("Number of Nodes are : %d \n",iRet);
+
+    DeleteFirst(&head,&tail);
+
+
+    Display(head,tail);
+    iRet = Count(head,tail);
+    printf("Number of Nodes are : %d \n",iRet);
+
+    DeleteLast(&head,&tail);
+
+    Display(head,tail);
+    iRet = Count(head,tail);
+    printf("Number of Nodes are : %d \n",iRet);
+
+
     return 0;
 }
