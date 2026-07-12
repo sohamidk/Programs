@@ -1,0 +1,130 @@
+package Java_programs.Data_Structure;
+
+class node
+{
+    public int data;
+    public node next;
+    
+    node(int iNo)
+    {
+        this.data = iNo;
+        this.next = null;
+    }
+
+}
+
+
+class SinglyLL
+{
+    private node first;
+    private int iCount;
+
+    
+    public SinglyLL()       //constructor
+    {
+        this.first = null;
+        this.iCount = 0;
+    }
+
+
+    public void Display()
+    {
+        
+        node temp = first;
+
+        while(temp != null)
+        {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+
+    public int Count()
+    {
+        return iCount;
+    }
+
+
+    public void InsertFirst(int iNo)
+    {
+        node newn = new node(iNo);
+        if(first == null)
+        {
+            this.first = newn;
+        }
+        else
+        {
+            newn.next = this.first;
+            this.first = newn;
+        }
+        iCount++;
+    }
+
+
+    public void InsertLast(int iNo)
+    {
+        node newn = new node(iNo);
+
+        if(first == null)
+        {
+            this.first = newn;
+        }
+        else
+        {
+            node temp = first;
+            while(temp.next != null)
+            {
+                temp = temp.next;
+            }  
+            temp.next = newn;
+        }
+        iCount++;
+    }
+    
+
+    public void InsertAtPos(int iNo,int iPos)
+    {
+
+    }
+
+
+    public void DeleteFirst()
+    {}
+
+
+    public void DeleteLast()
+    {}
+
+
+    public void DeleteAtPos(int iPos)
+    {}
+
+
+}
+
+
+class program454 
+{
+    public static void main(String[] args)
+    {
+        int iRet = 0;
+        SinglyLL sobj = new SinglyLL();
+
+        sobj.InsertFirst(51);
+        sobj.InsertFirst(21);
+        sobj.InsertFirst(11);
+
+
+        sobj.InsertLast(101);
+        sobj.InsertLast(111);
+        sobj.InsertLast(121);
+
+        sobj.Display();
+        sobj.Display();
+        iRet = sobj.Count();
+        System.out.println("Number of nodes are : "+iRet);
+    }
+    
+}
