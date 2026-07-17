@@ -22,7 +22,6 @@ void Display(PNODE first , PNODE last)
     
     do
     {
-        
         printf("| %d | -> ",first->data);
         first = first -> next;
 
