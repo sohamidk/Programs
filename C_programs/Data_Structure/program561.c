@@ -111,12 +111,35 @@ int Count(PNODE first)
     return iCount;
 }
 
+bool Search(PNODE first, int iNo)
+{
+    bool bFlag = false;
+
+    while(first != NULL)
+    {
+        if(iNo == first->data)
+        {
+            bFlag = true;
+            break;
+        }
+        else if(iNo > first->data)
+        {
+            first = first->rChild;
+        }
+        else if(iNo < first->data)
+        {
+            first = first->lChild;
+        }
+    }
+    return bFlag;
+}
+
 
 int main()
 {
     PNODE head = NULL;
     int iRet = 0;
-
+    
     Insert(&head,11);
     Insert(&head,5);
     Insert(&head,17);
@@ -132,5 +155,14 @@ int main()
 
     iRet = Count(head);
     printf("Number of nodes are : %d\n",iRet);
+
+    if(Search(head,17) == true)
+    {
+        printf("17 is present in BST\n");
+    }
+    else
+    {
+        printf("17 is not present in BST \n");
+    }
     return 0;
 }

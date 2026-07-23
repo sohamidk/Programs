@@ -111,12 +111,67 @@ int Count(PNODE first)
     return iCount;
 }
 
+bool Search(PNODE first, int iNo)
+{
+    bool bFlag = false;
+
+    while(first != NULL)
+    {
+        if(iNo == first->data)
+        {
+            bFlag = true;
+            break;
+        }
+        else if(iNo > first->data)
+        {
+            first = first->rChild;
+        }
+        else if(iNo < first->data)
+        {
+            first = first->lChild;
+        }
+    }
+    return bFlag;
+}
+
+int CountLeaf(PNODE first)
+{
+    static int iCount = 0;
+
+    if(first != NULL)
+    {
+        if(first->lChild == NULL && first->rChild == NULL)
+        {
+            iCount++;
+        }
+        CountLeaf(first->lChild);
+        CountLeaf(first->rChild);
+    }
+    return iCount;
+}
+
+
+int CountParent(PNODE first)
+{
+    static int iCount = 0;
+
+    if(first != NULL)
+    {
+        if(first->lChild != NULL || first->rChild != NULL)
+        {
+            iCount++;
+        }
+        CountParent(first->lChild);
+        CountParent(first->rChild);
+    }
+    return iCount;
+}
 
 int main()
 {
     PNODE head = NULL;
     int iRet = 0;
-
+    
     Insert(&head,11);
     Insert(&head,5);
     Insert(&head,17);
@@ -132,5 +187,21 @@ int main()
 
     iRet = Count(head);
     printf("Number of nodes are : %d\n",iRet);
+
+    if(Search(head,25) == true)
+    {
+        printf("25 is present in BST\n");
+    }
+    else
+    {
+        printf("25 is not present in BST \n");
+    }
+
+    iRet = CountLeaf(head);
+    printf("Number of leaf Nodes are : %d \n",iRet);
+
+    
+    iRet = CountParent(head);
+    printf("Number of Parent Nodes are : %d \n",iRet);
     return 0;
 }
