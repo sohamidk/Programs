@@ -10,7 +10,6 @@ struct node
 };
 
 
-
 void Display(struct node * first)
 {
     while(first != NULL)        //Type1
