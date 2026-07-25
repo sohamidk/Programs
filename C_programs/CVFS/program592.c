@@ -10,7 +10,7 @@ int main()
     char Buffer[BUFFER_SIZE] = {'\0'};
     int iRet = 0, fd = 0;
 
-    fd = open("Marvellous.txt",O_RDONLY);
+    fd = open("program592.c",O_RDONLY);
     
     while((iRet = read(fd,Buffer,sizeof(Buffer))) != 0)
     {
