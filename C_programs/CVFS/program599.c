@@ -5,7 +5,8 @@
 
 #define BUFFER_SIZE 1024
 
-void DisplayFile(char FileName[])
+//Change in parameter
+void DisplayFile(char *FileName)
 {
     char Buffer[BUFFER_SIZE] = {'\0'};
     int iRet = 0, fd = 0;
