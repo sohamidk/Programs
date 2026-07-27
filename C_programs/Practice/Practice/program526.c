@@ -4,7 +4,7 @@ int Summation(int iNo)
 {
     static int iSum = 0;
    
-    if( iNo != 0)
+    if( iNo > 0)
     {
         iSum = iSum + iNo;
         iNo--;
