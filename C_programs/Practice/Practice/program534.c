@@ -8,9 +8,9 @@ void Display(int iNo)
    if(iNo != 0)
    {
         iDigit = iNo % 10;
-        printf("%d\n",iDigit);
         iNo = iNo / 10;
         Display(iNo);
+        printf("%d\n",iDigit);
    }
 }
 int main()
