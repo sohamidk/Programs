@@ -1,53 +1,65 @@
+//////////////////////////////////
+//
+// Header Files Inclusion
+//
+//////////////////////////////////
+
 #include<stdio.h>
-#include<fcntl.h>
 #include<unistd.h>
+#include<fcntl.h>
 #include<string.h>
+#include<stdbool.h>
 
-#define BUFFER_SIZE 1024
-#define ERR_OPEN -1
+/////////////////////////////////////////
+//
+// User defined Macros
+//
+/////////////////////////////////////////
 
-int CountSmall(char *FileName)
-{
-    char Buffer[BUFFER_SIZE] = {'\0'};
-    int iRet = 0, fd = 0, iCount = 0, i = 0;
+#define MAXFILESIZE 50
+#define MAXOPENFILES 10
 
-    fd = open(FileName,O_RDONLY);
+#define READ 1
+#define WRITE 1
+#define EXECUTE 4
 
-    if(fd == -1)
-    {
-        return ERR_OPEN;
-    }
+#define START 0
+#define CURRENT 1
+#define END 2
 
-    while((iRet = read(fd,Buffer,sizeof(Buffer))) != 0)
-    {
-        for(i = 0; i < iRet; i++)
-        {
-            if(Buffer[i] >='a' && Buffer[i] <= 'z')
-            {
-                iCount++;
-            }
-        }
-        memset(Buffer,'\0',sizeof(Buffer));
-    }
+#define EXECUTE_SUCCESS 0
 
-    return iCount;
-    close(fd);
-}
+#define REGULARFILE 1
+#define SPECIALFILE 2
+
+////////////////////////////////////////////
+//
+// User defined Macros for error handling
+//
+////////////////////////////////////////////
+
+#define ERR_INVALID_PARAMETER -1
+
+#define ERR_NO_INODES -2
+
+#define ERR_FILE_ALREADY_EXIST -3
+#define ERR_FILE_NOT_EXIST -4
+
+#define ERR_PERMISSION_DENIED -5
+
+#define ERR_INSUFFICIENT_SPACE -6
+#define ERR_INSUFFICIENT_DATA -7
+
+#define ERR_MAX_FILES_OPEN -8
+
+/////////////////////////////////////////
+//
+// Entry point function of CVFS project
+//
+/////////////////////////////////////////
 
 int main()
 {
-    char FName[30] = {'\0'};
-    int iRet = 0;
-    
-    printf("Enter the file name : \n");
-    scanf("%[^'\n']s",FName);
 
-    iRet = CountSmall(FName);
-    if(iRet == -1)
-    {
-        printf("Unable to open File\n");
-    }
-    printf("Count of small Letters Are : %d\n",iRet);
-   
     return 0;
 }
