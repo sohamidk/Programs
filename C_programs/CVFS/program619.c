@@ -1,20 +1,21 @@
-//////////////////////////////////
+/////////////////////////////////////////////////////////
 //
 // Header Files Inclusion
 //
-//////////////////////////////////
+/////////////////////////////////////////////////////////
 
 #include<stdio.h>
+#include<stdlib.h>
 #include<unistd.h>
 #include<fcntl.h>
 #include<string.h>
 #include<stdbool.h>
 
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 //
 // User defined Macros
 //
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 
 #define MAXINODE 10
 #define MAXFILESIZE 50
@@ -33,11 +34,11 @@
 #define REGULARFILE 1
 #define SPECIALFILE 2
 
-////////////////////////////////////////////
+/////////////////////////////////////////////////////////
 //
 // User defined Macros for error handling
 //
-////////////////////////////////////////////
+/////////////////////////////////////////////////////////
 
 #define ERR_INVALID_PARAMETER -1
 
@@ -152,7 +153,7 @@ PINODE head = NULL;
 
 /////////////////////////////////////////////////////////
 //
-// Function Name :  InitialiseUAREA
+// Function Name :  InitialiseUAREA()
 // Description :    It is used to initialise UREA
 // Author :         Soham Vade
 // Date :           31/07/2026
@@ -172,10 +173,9 @@ void InitialiseUAREA()
     printf("Marvellous CVFS : UAREA gets initialized successfully\n");
 }
 
-
 /////////////////////////////////////////////////////////
 //
-// Function Name :  InitialiseSuperBlock
+// Function Name :  InitialiseSuperBlock()
 // Description :    It is used to initialise SuperBlock
 // Author :         Soham Vade
 // Date :           31/07/2026
@@ -190,6 +190,51 @@ void InitialiseSuperBlock()
     printf("Marvellous CVFS : Superblock gets initialized successfully\n");
 }
 
+/////////////////////////////////////////////////////////
+//
+// Function Name :  CreateDILB()
+// Description :    It is used to create Linked List of inodes
+// Author :         Soham Vade
+// Date :           31/07/2026
+//
+/////////////////////////////////////////////////////////
+
+void CreateDILB()
+{ 
+    int i = 0;
+    PINODE temp = NULL;
+    PINODE newn = NULL;
+    temp = head;
+
+    for(i = 1; i <= MAXINODE; i++)
+    {
+        newn = (PINODE)malloc(sizeof(INODE));
+
+        newn->InodeNumber = i;
+        strcpy(newn->FileName,"\0");
+        newn->FileSize = 0;
+        newn->ActualFileSize = 0;
+        newn->FileType = 0;
+        newn->ReferenceCount = 0;
+        newn->Permission = 0;
+        newn->Buffer = NULL;
+
+        if(temp == NULL)
+        {
+            head = newn;
+            temp = head;
+        }
+        else
+        {
+            temp->next = newn;
+            temp = temp->next;
+        }
+    }
+    printf("Marvellous CVFS : DILB gets created successfully\n");
+
+
+}
+
 /////////////////////////////////////////
 //
 // Entry point function of CVFS project
@@ -201,6 +246,7 @@ int main()
 
     InitialiseUAREA();
     InitialiseSuperBlock();
+    CreateDILB();
     
     return 0;
 }
