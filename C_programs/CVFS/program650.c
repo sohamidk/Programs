@@ -319,6 +319,34 @@ void ManPageDisplay(char Name[])
         printf("About : It is used to clear the terminal\n");
         printf("Usage : clear\n");
     }
+    else if(strcmp(Name,"creat") == 0)
+    {
+        printf("About : It is used to create the new file\n");
+        printf("Usage : creat File_name Permission\n");
+
+        printf("File name : Name of file that we want to create\n");
+
+        printf("Permission : Permission of the new file\n");
+
+        printf("Permission : Read -> 1\n");
+        printf("Permission : write -> 2\n");
+        printf("Permission : Read + write -> 3\n");
+
+    }
+    else if(strcmp(Name,"unlink") == 0)
+    {
+        printf("About : It is used to delete the exisiting file\n");
+        printf("Usage : unlink File_name Permission\n");
+
+        printf("File name : Name of file that we want to delete\n");
+    }
+    else if(strcmp(Name,"stat") == 0)
+    {
+        printf("About : It is used to get information the file\n");
+        printf("Usage : stat File_name\n");
+
+        printf("File name : Name of file that whose information should be fetched\n");
+    }
     else
     {
         printf("No manual entry found for %s\n",Name);
@@ -519,6 +547,152 @@ void LsFile_All()
     }
 }
 
+
+/////////////////////////////////////////////////////////
+//
+// Function Name :  stat_file(char name[])
+// Description :    It is used to display all details of 
+//                  specific file
+// Input :          File Name
+// output :         Exit status of function
+// Author :         Soham Vade
+// Date :           2/08/2026
+//
+/////////////////////////////////////////////////////////
+
+int stat_file(
+               char name[]
+             )
+{
+    PINODE temp = NULL;
+    int Permission = 0;
+    int Type = 0;
+
+    if(IsFileExist(name) == false)
+    {
+        return ERR_FILE_NOT_EXIST;
+    }
+
+    temp = head;
+
+    while(temp != NULL)
+    {
+        if(strcmp(temp->FileName,name) == 0)
+        {
+            printf("--------------------------------------------\n");
+            printf("----- Statistical Information of File ------\n");
+            printf("--------------------------------------------\n");
+
+            printf("File Name : %s\n", temp->FileName);
+
+            printf("Inode Number : %d\n", temp->InodeNumber);
+
+            printf("File size : %d\n", temp->FileSize);
+
+            printf("Actual File size : %d\n", temp->ActualFileSize);
+
+            printf("Reference Count : %d\n", temp->ReferenceCount);
+
+            Permission = temp->Permission;
+
+            if(Permission == READ)
+            {
+                printf("File Permission : Read only\n");
+            }
+            else if(Permission == WRITE)
+            {
+                printf("File Permission : write\n");
+            }
+            else if(Permission == READ + WRITE)
+            {
+                printf("File Permission : Read + Write\n");
+            }
+
+            Type = temp->FileType;
+            if(Type == REGULARFILE)
+            {
+                printf("File Type : Regular File \n");
+            }
+            else if(Type == SPECIALFILE)
+            {
+                printf("File Type : Speacial File \n");
+            }
+            
+            printf("--------------------------------------------\n");
+            break;
+        }
+        temp = temp->next;
+    }
+    return EXECUTE_SUCCESS;
+}
+
+
+/////////////////////////////////////////////////////////
+//
+// Function Name :  unlink(char name[])
+// Description :    It is used to delete specific file
+// Input :          File Name
+// output :         Exit status of function
+// Author :         Soham Vade
+// Date :           2/08/2026
+//
+/////////////////////////////////////////////////////////
+
+int unlink_file(
+                char name[]     //Name of file
+               )
+{
+    int i = 0;
+
+    if(IsFileExist(name) == false)
+    {
+        return ERR_FILE_NOT_EXIST;
+    }
+
+    //Travel the UFDT
+    for(i = 1; i <= MAXOPENFILES; i++)
+    {
+        if(uareaobj.UFDT[i] != NULL)
+        {
+            if(strcmp(uareaobj.UFDT[i]->ptrinode->FileName,name) == 0)
+            {
+                // Deallocate memory of Buffer
+                free(uareaobj.UFDT[i]->ptrinode->Buffer);
+
+                uareaobj.UFDT[i]->ptrinode->Buffer = NULL;
+
+                strcpy(uareaobj.UFDT[i]->ptrinode->FileName,"\0");
+
+                uareaobj.UFDT[i]->ptrinode->FileSize = 0;
+
+                uareaobj.UFDT[i]->ptrinode->ActualFileSize = 0;
+
+                uareaobj.UFDT[i]->ptrinode->FileType = 0;
+
+                uareaobj.UFDT[i]->ptrinode->ReferenceCount = 0;
+
+                uareaobj.UFDT[i]->ptrinode->Permission = 0;
+
+                // Deallocate memory of file table
+                free(uareaobj.UFDT[i]);
+
+                uareaobj.UFDT[i] = NULL;
+
+                superobj.FreeInodes++;
+
+                break;      //IMPORTANT
+            }
+
+        } // End of if
+
+    } // End of for loop
+
+    return EXECUTE_SUCCESS;
+    
+} // End of unlink_file()
+
+
+
 /////////////////////////////////////////
 //
 // Entry point function of CVFS project
@@ -603,12 +777,33 @@ int main()
             {
                 LsFile_All();
             }
+             // Marvellous CVFS : > stat Ganesh.txt
+            else if(strcmp(Command[0],"stat") == 0)
+            {
+                iRet = stat_file(Command[1]);
+
+                if(iRet == ERR_FILE_NOT_EXIST)
+                {
+                    printf("Error : File not exist\n");
+                }
+            }
+             // Marvellous CVFS : > unlink Ganesh.txt
+            else if(strcmp(Command[0],"unlink") == 0)
+            {
+                iRet = unlink_file(Command[1]);
+
+                if(iRet == ERR_FILE_NOT_EXIST)
+                {
+                    printf("Error : File not exist\n");
+                }
+            }
             else
             {
                 printf("Command not found\n");
                 printf("Please refer help option to get more information\n");
                 printf("please refer manual page of command using man\n");
             }
+
         }
         else if(iCount == 3)
         {
