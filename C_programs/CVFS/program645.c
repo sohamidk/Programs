@@ -17,9 +17,9 @@
 //
 /////////////////////////////////////////////////////////
 
-#define MAXINODE 10
+#define MAXINODE 5
 #define MAXFILESIZE 50
-#define MAXOPENFILES 10
+#define MAXOPENFILES 5
 
 #define READ 1
 #define WRITE 1
@@ -325,6 +325,141 @@ void ManPageDisplay(char Name[])
         printf("No manual entry found for %s\n",Name);
     }
 }
+/////////////////////////////////////////////////////////
+//
+// Function Name :  IsFileExist(name)
+// Description :    It is used to check whether the file
+//                  is present or not
+// Input :          Name of command 
+// output :         True is present
+//                  False is not present
+// Author :         Soham Vade
+// Date :           1/08/2026
+//
+/////////////////////////////////////////////////////////
+
+bool IsFileExist(
+                    char name[]         //Name of file
+                )
+{
+    PINODE temp = head;
+    bool bFlag = false;
+
+    while(temp != NULL)
+    {
+        if(strcmp(temp->FileName, name) == 0)
+        {
+            bFlag = true;
+            break;
+        }
+        temp = temp->next;
+    }
+    return bFlag;
+}
+
+/////////////////////////////////////////////////////////
+//
+// Function Name :  CreateFile(char name[], int permission)
+// Description :    It is used to create new file 
+// Input :          Name of command & permissions
+// output :         file Descirptor
+// Author :         Soham Vade
+// Date :           1/08/2026
+//
+/////////////////////////////////////////////////////////
+
+int CreateFile  (
+                    char name[] ,       //Name of File
+                    int permission      //File permission
+                )
+{
+    PINODE temp = head;
+    int i = 0;
+    if(superobj.FreeInodes == 0)
+    {
+        return ERR_NO_INODES;
+    }
+    
+
+    //If permission value is wrong
+    // Permission == 1 -> (READ)
+    // Permission == 2 -> (WRITE)
+    // Permission == 1 -> (READ & WRITE)
+    if(permission < 1 || permission > 3)
+    {
+        return ERR_INVALID_PARAMETER;
+    }
+
+    if(IsFileExist(name) == true)
+    {
+        return ERR_FILE_ALREADY_EXIST;
+    }
+
+    // Search for empty inode
+
+    while(temp != NULL)
+    {
+        if(temp->FileType == 0)
+        {
+            break;
+        }
+        temp = temp->next;
+    }
+
+    //Rare case
+    if(temp == NULL)
+    {
+        return ERR_NO_INODES;
+    }
+
+    //Search empty UFDT entry
+    // Reserve first 3 FD's
+    for(i = 3; i < MAXINODE; i++)
+    {
+        if(uareaobj.UFDT[i] == NULL)
+        {
+            break;
+        }
+    }
+
+    if(i == MAXOPENFILES)
+    {
+        return ERR_MAX_FILES_OPEN;
+    }
+
+    // Allocate memory for file table
+    uareaobj.UFDT[i] = (PFILETABLE)malloc(sizeof(FILETABLE));
+
+    // Initialise File table
+    uareaobj.UFDT[i]->ReadOffset = 0;
+    uareaobj.UFDT[i]->WriteOffset = 0;
+    uareaobj.UFDT[i]->Mode = permission;
+
+    // Connect File Table with Inode
+    uareaobj.UFDT[i]->ptrinode = temp;
+
+    // Initialise all members of inode
+    strcpy(uareaobj.UFDT[i]->ptrinode->FileName,name);
+
+    uareaobj.UFDT[i]->ptrinode->FileSize = MAXFILESIZE;
+
+    uareaobj.UFDT[i]->ptrinode->ActualFileSize = 0;
+    
+    uareaobj.UFDT[i]->ptrinode->FileType = REGULARFILE;
+
+    uareaobj.UFDT[i]->ptrinode->ReferenceCount = 1;
+
+    uareaobj.UFDT[i]->ptrinode->Permission = permission;
+
+    // Allocate memory for files data (Data Block)
+
+    uareaobj.UFDT[i]->ptrinode->Buffer = (char *)malloc(MAXFILESIZE);
+
+    superobj.FreeInodes--;
+
+
+    return i;
+}
 
 /////////////////////////////////////////
 //
@@ -361,8 +496,10 @@ int main()
         
         fflush(stdin);
 
+        //Tokens
         if(iCount == 1)
         {
+            // Marvellous CVFS : > exit
             if(strcmp(Command[0],"exit") == 0)
             {
                 printf("Thank You for using Marvellous CVFS\n");
@@ -370,10 +507,12 @@ int main()
 
                 break;
             }
+            // Marvellous CVFS : > help
             else if(strcmp(Command[0],"help") == 0)
             {
                 DisplayHelp();
             }
+            // Marvellous CVFS : > clear
             else if(strcmp(Command[0],"clear") == 0)
             {
                 #ifdef _WIN32
@@ -391,6 +530,7 @@ int main()
         }
         else if(iCount == 2)
         {
+            // Marvellous CVFS : > man open
             if(strcmp(Command[0],"man") == 0)
             {
                 ManPageDisplay(Command[1]);
@@ -404,7 +544,39 @@ int main()
         }
         else if(iCount == 3)
         {
-            
+            // Marvellous CVFS : > creat Ganesh.txt 3
+            if(strcmp(Command[0],"creat") == 0)
+            {
+                iRet = CreateFile(Command[1], atoi(Command[2]));
+
+                if(iRet == ERR_NO_INODES)
+                {
+                    printf("Error : Unable to create new file\n");
+                    printf("Because there is no free inode\n");
+                }
+                else if(iRet == ERR_INVALID_PARAMETER)
+                {
+                    printf("Error : Unable to create new file\n");
+                    printf("Because paramters of command are Invalid\n");
+                    printf("Please use man page to get actual paramters\n");
+                }
+                else if(iRet == ERR_FILE_ALREADY_EXIST)
+                {
+                    printf("Error : Unable to create new file\n");
+                    printf("Because the file name is already present\n");
+                    printf("Please use ls command to check names of all files\n");
+                }
+                else if(iRet == ERR_MAX_FILES_OPEN)
+                {
+                    printf("Error : Unable to create new file\n");
+                    printf("Because the UFDT is full\n");
+                    printf("Please close some opened files\n");
+                }
+                else
+                {
+                    printf("File successfully created with FD : %d\n",iRet);
+                }
+            }
         }
         else if(iCount == 4)
         {
