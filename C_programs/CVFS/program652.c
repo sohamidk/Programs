@@ -707,14 +707,15 @@ int unlink_file(
 /////////////////////////////////////////////////////////
 
 int write_file(
-                int fd, 
-                char *data, 
-                int size
+                    int fd,
+                    char *data,
+                    int size
               )
 {
+    int offset = 0;
 
     printf("File Descriptor : %d\n",fd);
-    printf("Data we want to write : %s\n",data);
+    printf("Data that we want to write : %s\n",data);
     printf("Size of data : %d\n",size);
 
     // If fd is invalid
@@ -722,22 +723,26 @@ int write_file(
     {
         return ERR_INVALID_PARAMETER;
     }
-    //If writing permission is not there
+
+    // If writting permission is not there
     if(uareaobj.UFDT[fd]->ptrinode->Permission < WRITE)
     {
         return ERR_PERMISSION_DENIED;
     }
 
-    // Check the Spcae is there or not
+    // Check the space is there or not
     if((MAXFILESIZE - uareaobj.UFDT[fd]->WriteOffset) < size)
     {
         return ERR_INSUFFICIENT_SPACE;
     }
 
-    //Actual data writing
-    strncpy(uareaobj.UFDT[fd]->ptrinode->Buffer + uareaobj.UFDT[fd]->WriteOffset, data, size);
+    //offset = uareaobj.UFDT[fd]->ptrinode->Buffer + uareaobj.UFDT[fd]->WriteOffset;
 
-    //Update the write offset
+    // Actual data writting
+    strncpy(uareaobj.UFDT[fd]->ptrinode->Buffer + uareaobj.UFDT[fd]->WriteOffset,data,size);
+
+
+    // Update the write offset
 
     uareaobj.UFDT[fd]->WriteOffset = uareaobj.UFDT[fd]->WriteOffset + size;
 
@@ -745,6 +750,62 @@ int write_file(
 
     uareaobj.UFDT[fd]->ptrinode->ActualFileSize = uareaobj.UFDT[fd]->ptrinode->ActualFileSize + size;
 
+    return size;
+}
+
+/////////////////////////////////////////////////////////
+//
+// Function Name :  read_file()
+// Description :    It is used to read the data into 
+//                  specific file
+// Input :          File descriptor
+//                  Address of empty Buffer
+//                  size of data
+// output :         Number of bytes successfully written
+// Author :         Soham Vade
+// Date :           2/08/2026
+//
+/////////////////////////////////////////////////////////
+
+int read_file(
+                int fd,
+                char *data,
+                int size
+             )
+{
+    //Invalid fd
+    if(fd < 0 || fd > MAXOPENFILES)
+    {
+        return ERR_INVALID_PARAMETER;
+    }
+
+    if(size < 0)
+    {
+        return ERR_INVALID_PARAMETER;      
+    }
+
+    if(uareaobj.UFDT[fd] == NULL)
+    {
+        return ERR_FILE_NOT_EXIST;
+    }
+
+    // Filter for permission
+    if(uareaobj.UFDT[fd]->ptrinode->Permission < READ)
+    {
+        return ERR_PERMISSION_DENIED;
+    }
+
+    // Insufficient data
+    if((MAXFILESIZE - uareaobj.UFDT[fd]->ReadOffset) < size)
+    {
+        return ERR_INSUFFICIENT_DATA;
+    }
+
+    //Read the data
+
+    strncpy(data, uareaobj.UFDT[fd]->ptrinode->Buffer + uareaobj.UFDT[fd]->ReadOffset, size);
+
+    uareaobj.UFDT[fd]->ReadOffset = uareaobj.UFDT[fd]->ReadOffset + size;
     return size;
 }
 
@@ -764,6 +825,9 @@ int main()
 
     //Data for write system call
     char InputBuffer[MAXFILESIZE] = {'\0'};
+
+    //Empty buffer for carry data
+    char *EmptyBuffer = NULL;
 
     int iCount = 0, iRet = 0;
 
@@ -870,7 +934,7 @@ int main()
 
                 iRet = write_file(atoi(Command[1]),InputBuffer,size-1);
 
-                if(iRet = ERR_INVALID_PARAMETER)
+                if(iRet == ERR_INVALID_PARAMETER)
                 {
                     printf(" Error : Invalid Parameter\n");
                     printf("Please refere man page for more information\n");
@@ -935,6 +999,46 @@ int main()
                     printf("File successfully created with FD : %d\n",iRet);
                 }
             }
+            // Marvellous CVFS : > open 3 10
+            else if(strcmp(Command[0],"read") == 0)
+            {
+                EmptyBuffer =(char *)malloc(atoi(Command[2]));
+
+                iRet = read_file(atoi(Command[1]),EmptyBuffer,atoi(Command[2]));
+
+                if(iRet == ERR_INVALID_PARAMETER)
+                {
+                    printf("Error : Invalid Paremeters\n");
+                }
+                else if(iRet == ERR_FILE_NOT_EXIST)
+                {
+                    printf("Error : File not exist\n");
+                }
+                else if(iRet == ERR_INSUFFICIENT_DATA)
+                {
+                    printf("Error : Insuuficient data\n");
+                }
+                else if(iRet == ERR_PERMISSION_DENIED)
+                {
+                    printf("Error : Permission Denied\n");
+                }
+                else
+                {
+                    printf("Read operation successfull\n");
+                    printf("Data from file : \n");
+
+                    printf("%s\n",EmptyBuffer);
+
+                    free(EmptyBuffer);
+                }
+            }
+            else
+            {
+                printf("Command not found\n");
+                printf("Please refer help option to get more information\n");
+                printf("please refer manual page of command using man\n");
+            }
+
         }
         else if(iCount == 4)
         {
