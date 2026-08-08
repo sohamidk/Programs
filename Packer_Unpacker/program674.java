@@ -2,7 +2,7 @@ package Packer_Unpacker;
 import java.util.*;
 import java.io.*;
 
-public class program673
+public class program674
 {
     public static void main(String[] args)
     {
@@ -12,5 +12,10 @@ public class program673
 
        System.out.println(Data.length());
        System.out.println(Arr.length);
+
+       for(int i = 0; i < Arr.length; i++)
+       {
+            System.out.println(Arr[i]);
+       }
     }
 }

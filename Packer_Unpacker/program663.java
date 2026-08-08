@@ -1,5 +1,4 @@
 package Packer_Unpacker;
-import java.util.*;
 import java.io.*;
 
 public class program663
@@ -8,5 +7,7 @@ public class program663
     {
         FileWriter fwobj = new FileWriter("Demo.txt");
         fwobj.write("Jay Ganesh..."); 
+
+        fwobj.close();
     }
 }
