@@ -1,0 +1,14 @@
+package Packer_Unpacker;
+
+import java.io.*;
+
+public class program655 
+{
+    public static void main(String[] args) throws IOException
+    {
+        File fobj = new File("Demo.txt");
+
+        fobj.createNewFile();      
+
+    } 
+}
