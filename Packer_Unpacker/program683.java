@@ -2,7 +2,7 @@ package Packer_Unpacker;
 import java.util.*;
 import java.io.*;
 
-public class program679
+public class program683
 {
     public static void main(String[] args) throws Exception
     {
@@ -20,14 +20,19 @@ public class program679
 
         fiobj = new FileInputStream(fobj);
         
-        byte Arr[] = new byte[50];
+        byte Buffer[] = new byte[50];
         
         if(fobj.exists())
         {
-           fiobj.read(Arr);
-
-           String str = new String(Arr);
-           System.out.println(str);
+            String str = null;
+            int iRet = 0;
+            while((iRet = fiobj.read(Buffer)) != -1)
+            {
+                str = new String(Buffer,0,iRet);        //IMP
+                System.out.print(str); 
+                str = null;
+            }
+            
         }
         else
         {
