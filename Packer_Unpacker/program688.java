@@ -2,7 +2,7 @@ package Packer_Unpacker;
 import java.util.*;
 import java.io.*;
 
-public class program685
+public class program688
 {
     public static void main(String[] args) throws Exception
     {
@@ -14,9 +14,18 @@ public class program685
 
         File fobj = new File(FolderName);
         
-        if(fobj.exists())
+        if((fobj.exists()) && (fobj.isDirectory()))
         {
             System.out.println("Folder exists");
+
+            File fArr[] = fobj.listFiles();
+
+            System.out.println("Number of Files in Folder " + fArr.length);
+
+            for(int i = 0; i < fArr.length; i++)
+            {
+                System.out.println("File Name : " + fArr[i].getName());
+            }
         }
         else
         {

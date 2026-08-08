@@ -2,7 +2,7 @@ package Packer_Unpacker;
 import java.util.*;
 import java.io.*;
 
-public class program685
+public class program686
 {
     public static void main(String[] args) throws Exception
     {
@@ -14,7 +14,7 @@ public class program685
 
         File fobj = new File(FolderName);
         
-        if(fobj.exists())
+        if((fobj.exists()) && (fobj.isDirectory()))
         {
             System.out.println("Folder exists");
         }
