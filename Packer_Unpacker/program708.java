@@ -2,7 +2,7 @@ package Packer_Unpacker;
 import java.util.*;
 
 
-public class program706
+public class program708
 {
     public static void main(String[] args)
     {
@@ -17,7 +17,10 @@ public class program706
         str = str.trim();
 
         System.out.println("String is : " + str + " Having Length : " + str.length());
+
+        str = str.replaceAll("\\s+", " ");
        
+        System.out.println("String is : " + str + " Having Length : " + str.length());
     }
 
 }
