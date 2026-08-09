@@ -2,7 +2,7 @@ package Packer_Unpacker;
 import java.util.*;
 import java.io.*;
 
-public class program691
+public class program693
 {
     public static void main(String[] args) throws Exception
     {
@@ -24,7 +24,6 @@ public class program691
         
         if((fobjFolder.exists()) && (fobjFolder.isDirectory()))
         {
-            int iRet = 0;
             System.out.println("Folder exists");
 
             File fobjPack = new File(PackFileName);
@@ -39,14 +38,16 @@ public class program691
 
             for(int i = 0; i < fArr.length; i++)
             {
+
                 fiobj = new FileInputStream(fArr[i]);
 
-                // Loop to read from fiobj and write to foobj
-                while((iRet = fiobj.read()) != -1)
-                {
-                    foobj.write();
-                }
+                System.out.println(fArr[i].getName());
+
+                fiobj.close();
             }
+
+            foobj.close();
+            sobj.close();
         }
         else
         {

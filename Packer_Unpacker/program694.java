@@ -2,10 +2,12 @@ package Packer_Unpacker;
 import java.util.*;
 import java.io.*;
 
-public class program691
+public class program694
 {
     public static void main(String[] args) throws Exception
     {
+        int iRet = 0;
+
         Scanner sobj = new Scanner(System.in);
         String FolderName = null;
         String PackFileName = null;
@@ -22,9 +24,9 @@ public class program691
         File fobjFolder = new File(FolderName);
 
         
+
         if((fobjFolder.exists()) && (fobjFolder.isDirectory()))
         {
-            int iRet = 0;
             System.out.println("Folder exists");
 
             File fobjPack = new File(PackFileName);
@@ -37,16 +39,26 @@ public class program691
 
             System.out.println("Number of Files in Folder " + fArr.length);
 
+            byte Buffer[] = new byte[1024];
+
             for(int i = 0; i < fArr.length; i++)
             {
                 fiobj = new FileInputStream(fArr[i]);
 
-                // Loop to read from fiobj and write to foobj
-                while((iRet = fiobj.read()) != -1)
+                System.out.println(fArr[i].getName());
+
+                // Write file name and size
+
+                while((iRet = fiobj.read(Buffer)) != -1)
                 {
-                    foobj.write();
+                    foobj.write(Buffer, 0, iRet);
                 }
+
+                fiobj.close();
             }
+
+            foobj.close();
+            sobj.close();
         }
         else
         {
