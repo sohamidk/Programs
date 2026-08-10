@@ -7,6 +7,7 @@ public class program733
 {
     public static void main(String args[]) throws Exception
     {
+        // Variables
         Scanner sobj = new Scanner(System.in);
         String packFileName = null;
         File fPackobj = null;
@@ -17,6 +18,7 @@ public class program733
         File newFile = null;
         FileOutputStream foobj = null;
         byte Buffer[] = null;
+        int iRet = 0;
 
 
 
@@ -31,32 +33,33 @@ public class program733
             fiobj = new FileInputStream(fPackobj);
 
             // Read  Header
-            fiobj.read(Header,0,100);
+            while((iRet = fiobj.read(Header,0,100)) != -1)
+            {
+                strHeader = new String(Header);
 
-            strHeader = new String(Header);
+                System.out.println("Header is : " + strHeader);
 
-            System.out.println("Header is : " + strHeader);
+                strHeader = strHeader.trim();
+                strHeader = strHeader.replaceAll("\\s+", " ");
 
-            strHeader = strHeader.trim();
-            strHeader = strHeader.replaceAll("\\s+", " ");
+                Tokens = strHeader.split(" ");
+                System.out.println("File Name : " + Tokens[0]);
+                System.out.println("File size : " + Tokens[1]);
 
-            Tokens = strHeader.split(" ");
-            System.out.println("File Name : " + Tokens[0]);
-            System.out.println("File size : " + Tokens[1]);
+                newFile = new File(Tokens[0]);
+                newFile.createNewFile();
 
-            newFile = new File(Tokens[0]);
-            newFile.createNewFile();
+                foobj = new FileOutputStream(newFile);
 
-            foobj = new FileOutputStream(newFile);
+                Buffer = new byte[Integer.parseInt(Tokens[1])];
 
-            Buffer = new byte[Integer.parseInt(Tokens[1])];
+                // Read data
+                fiobj.read(Buffer, 0, Integer.parseInt(Tokens[1]));
 
-            // Read data
-            fiobj.read(Buffer, 0, Integer.parseInt(Tokens[1]));
-
-            // Write the data
-            foobj.write(Buffer, 0, Integer.parseInt(Tokens[1]));
-
+                // Write the data
+                foobj.write(Buffer, 0, Integer.parseInt(Tokens[1]));
+                
+            }// End of while
         }
         else
         {
