@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class program769
+public class program770
 {
     public static void main(String args[])
     {
@@ -13,7 +13,8 @@ public class program769
         hobj.put('a', 2);
         hobj.put('b', 2);
 
-        System.out.println(hobj.keySet());
+        System.out.println(hobj.containsKey('b'));
+        System.out.println(hobj.containsKey('c'));
         
         sobj.close();
     }
