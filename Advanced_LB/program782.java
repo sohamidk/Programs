@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class program780
+public class program782
 {
     public static void main(String args[])
     {
@@ -29,7 +29,13 @@ public class program780
             }
         }
 
-        System.out.println(hobj);
+        System.out.println("Frequency of each word is : ");
+
+        for(String sValue : hobj.keySet())
+        {
+            System.out.println(sValue + " : " + hobj.get(sValue));
+        }
+
         sobj.close();
     }
 }

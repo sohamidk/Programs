@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class program780
+public class program783
 {
     public static void main(String args[])
     {
@@ -29,7 +29,19 @@ public class program780
             }
         }
 
-        System.out.println(hobj);
+        int iMax = 0;
+        String temp = null;
+
+        for(String sValue : hobj.keySet())
+        {
+            if(hobj.get(sValue) > iMax)
+            {
+                iMax = hobj.get(sValue);
+                temp = sValue;
+            }
+        }
+
+        System.out.println(temp + " : Occurs maximum number of times " + iMax);
         sobj.close();
     }
 }
