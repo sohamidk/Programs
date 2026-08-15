@@ -1,5 +1,3 @@
-package Advanced_LB;
-
 import java.util.*;
 
 public class program763
