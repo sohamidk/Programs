@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class program773
+public class program775
 {
     public static void main(String args[])
     {
@@ -27,9 +27,19 @@ public class program773
            }
         }
         
-        System.out.println(hobj);
+        int iMax = 0;
+        char temp = '\0';
 
-        
+        for(char cValue : hobj.keySet())
+        {
+            if(hobj.get(cValue) > iMax)
+            {
+                iMax = hobj.get(cValue);
+                temp = cValue;
+            }
+        }
+
+        System.out.println(temp + " : Occurs maximum times i.e : " + iMax);
 
         
         sobj.close();

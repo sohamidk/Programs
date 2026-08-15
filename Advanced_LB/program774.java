@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class program773
+public class program774
 {
     public static void main(String args[])
     {
@@ -27,7 +27,10 @@ public class program773
            }
         }
         
-        System.out.println(hobj);
+        for(char cValue : hobj.keySet())
+        {
+            System.out.println(cValue + " : Occures " + hobj.get(cValue) + " Times");
+        }
 
         
 

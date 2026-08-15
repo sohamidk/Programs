@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class program773
+public class program776
 {
     public static void main(String args[])
     {
@@ -27,10 +27,17 @@ public class program773
            }
         }
         
-        System.out.println(hobj);
+        char Brr[] = new char[hobj.size()];
 
-        
+        int i = 0;
 
+        for(char cValue : hobj.keySet())
+        {
+            Brr[i] = cValue;
+            i++;
+        }
+
+        System.out.println(new String(Brr));
         
         sobj.close();
     }
