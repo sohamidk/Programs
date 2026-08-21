@@ -3,6 +3,7 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+
 class StudyLog
 {
     public LocalDate Date;
@@ -45,20 +46,34 @@ class StudyLog
         return this.Description;
     }
 }
-public class program846
+public class program850
 {
     public static void main(String[] args) 
     {
         LocalDate lobj = LocalDate.now();
 
-        StudyLog sobj1 = new StudyLog(lobj, "C Programming", 3.5, "Pointer in C");
+        ArrayList <StudyLog>Database = new ArrayList<StudyLog>();
         
-        System.out.println(sobj1);   
+        StudyLog sobj1 = new StudyLog(lobj, "C Programming", 3.5, "Pointers in C");
+        StudyLog sobj2 = new StudyLog(lobj, "C++ Programming", 3.5, "Pointers in C");
+        StudyLog sobj3 = new StudyLog(lobj, "Java Programming", 3.5, "Pointers in C");
 
-        System.out.println(sobj1.getDate());
-        System.out.println(sobj1.getSubject());
-        System.out.println(sobj1.getDuration());
-        System.out.println(sobj1.getDiscription());
-        
+        Database.add(sobj1);
+        Database.add(sobj2);
+        Database.add(sobj3);
+
+        for(StudyLog sobj : Database)
+        {
+            System.out.println(sobj);
+        }
+
+        Database.remove(1);
+
+        System.out.println("After Removal");
+
+        for(StudyLog sobj : Database)
+        {
+            System.out.println(sobj);
+        }
     }    
 }
