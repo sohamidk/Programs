@@ -3,13 +3,7 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/* class Object
-{
-    public String toString()
-    {}
-}*/
 
-// class StudyLog extends Object
 class StudyLog
 {
     public LocalDate Date;
@@ -26,7 +20,7 @@ class StudyLog
 
     }
 
-    //Override
+    
     public String toString()
     {
         return Date + " | " + Subject + " | " + Duration + " | " + Description;
