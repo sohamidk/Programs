@@ -146,13 +146,38 @@ final class Sorting extends ArrayX
             System.out.println("Data after pass : " + pass);
             Display();
 
+        }// End of for
+
+        IsSorted = true;
+
+    } // End of SelectionSort()
+
+    public void InsertionSort()
+    {
+        int i = 0, j = 0;
+        int selected = 0;
+
+        if(IsSorted == true)
+        {
+            return;
         }
+
+        for(i = 1; i < iSize; i++)
+        {
+            for(j = i - 1,selected = Arr[i]; (j >= 0) && (Arr[j] > selected); j--)
+            {
+                Arr[j+1] = Arr[j];
+            }
+
+            Arr[j+1] = selected;
+        }
+
         IsSorted = true;
 
     }
 }
 
-public class program898
+public class program899
 {
     public static void main(String[] args) 
     {
@@ -166,7 +191,7 @@ public class program898
         srobj.Accept();
         srobj.Display();
 
-        srobj.SelectionSort();
+        srobj.InsertionSort();
         
         System.out.println("Final sorted array : ");
         srobj.Display();
