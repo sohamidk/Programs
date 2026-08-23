@@ -20,15 +20,35 @@ class ArrayX implements GetterSetter
 
     public void Accept()
     {
+        int i = 0;
+        boolean sorted = true;
         Scanner sobj = new Scanner(System.in);
 
         System.out.println("Enter the elements of array");
         
-        for(int i = 0; i < this.iSize;i++)
+
+        for(i = 0; i < this.iSize;i++)
         {
             Arr[i] = sobj.nextInt();
         }
+        for(i = 0; i < iSize -1; i++)
+        {
+            if(Arr[i] > Arr[i + 1])
+            {
+                sorted = false;
+                break;
+            }
+        }
 
+        if(sorted == true)
+        {
+            System.out.println("Entered Array is sorted");
+        }
+        else
+        {
+            System.out.println("Invalid input, please eneter sorted array");
+        }
+        
         sobj.close();
     }
 
