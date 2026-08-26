@@ -1,0 +1,32 @@
+Aug 26, 2026 7:45:46 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 26, 2026 7:45:46 PM FTP_Server.program926 LogFile
+INFO: Command recieved : null
+Aug 26, 2026 7:49:39 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 26, 2026 7:49:39 PM FTP_Server.program926 LogFile
+INFO: Command recieved : Multiply 10 20
+Aug 26, 2026 7:49:43 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 26, 2026 7:49:43 PM FTP_Server.program926 LogFile
+INFO: Command recieved : Add
+Aug 26, 2026 7:49:53 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 26, 2026 7:49:53 PM FTP_Server.program926 LogFile
+INFO: Command recieved : ADD 10 20
+Aug 26, 2026 8:36:49 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 26, 2026 8:36:49 PM FTP_Server.program926 LogFile
+INFO: Command recieved : MULTIPLY 2 3
+Aug 26, 2026 8:36:57 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 26, 2026 8:36:57 PM FTP_Server.program926 LogFile
+INFO: Command recieved : MOD 10 2
+Aug 26, 2026 8:37:04 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 26, 2026 8:37:04 PM FTP_Server.program926 LogFile
+INFO: Command recieved : MOD 6 5
+Aug 26, 2026 8:37:13 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 26, 2026 8:37:13 PM FTP_Server.program926 LogFile
+INFO: Command recieved : DIVIDE 10 5
