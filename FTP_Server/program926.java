@@ -92,12 +92,12 @@ public class program926
                     result = no1 - no2;
                     dos.writeUTF("Result is : " + result);
                 }
-                else if(operation.equals("MULTIPLY"))
+                else if(operation.equals("MULT"))
                 {
                     result = no1 * no2;
                     dos.writeUTF("Result is : " + result);
                 }
-                else if(operation.equals("DIVIDE"))
+                else if(operation.equals("DIV"))
                 {
                     result = no1 / no2;
                     dos.writeUTF("Result is : " + result);
@@ -106,6 +106,28 @@ public class program926
                 {
                     result = no1 % no2;
                     dos.writeUTF("Result is : " + result);
+                }
+                else if(operation.equals("MAX"))
+                {
+                    if(no1 > no2)
+                    {
+                        dos.writeUTF("Maximum Number is : " + no1);
+                    }
+                    else
+                    {
+                        dos.writeUTF("Maximum Number is : " + no2);
+                    }
+                }
+                else if(operation.equals("MIN"))
+                {
+                    if(no1 < no2)
+                    {
+                        dos.writeUTF("Minimum Number is : " + no1);
+                    }
+                    else
+                    {
+                        dos.writeUTF("Minimum Number is : " + no2);
+                    }
                 }
                 else
                 {
@@ -122,6 +144,58 @@ public class program926
         catch(Exception e)
         {
             System.out.println("Exception Error : " + e);
+        }
+    }
+
+    public static void HandleClientRequest2(Socket socket)
+    {
+        try
+        {
+            DataInputStream dis = new DataInputStream(socket.getInputStream());
+            DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+
+            while(true)
+            {
+                String Command = dis.readUTF();
+
+                String Parts[] = Command.split(" ");
+
+                String operation1 = Parts[0].toUpperCase();
+
+                if(operation1.equals("QUIT"))
+                {
+                    dos.writeUTF("Disconnected from server");
+                    break;
+                }
+
+                if(Parts.length != 2)
+                {
+                    dos.writeUTF("Invalid command format");
+                    continue;
+                }
+
+                double no = Double.parseDouble(Parts[1]);
+
+                if(operation1.equals("EVEN"))
+                {
+                    if(no % 2 == 0)
+                    {
+                        dos.writeUTF(no + " is Even number");
+                    }
+                }
+                else if(operation1.equals("ODD"))
+                {
+                    if(no % 2 != 0)
+                    {
+                        dos.writeUTF(no + " is Odd number");
+                    }
+                }
+
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Exception Error : "  + e);
         }
     }
 

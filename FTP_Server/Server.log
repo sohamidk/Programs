@@ -30,3 +30,35 @@ Aug 26, 2026 8:37:13 PM FTP_Server.program926 LogFile
 INFO: Client connected : /127.0.0.1
 Aug 26, 2026 8:37:13 PM FTP_Server.program926 LogFile
 INFO: Command recieved : DIVIDE 10 5
+Aug 26, 2026 8:42:27 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 26, 2026 8:42:27 PM FTP_Server.program926 LogFile
+INFO: Command recieved : FACTORIAL 5
+Aug 26, 2026 8:46:20 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 26, 2026 8:46:20 PM FTP_Server.program926 LogFile
+INFO: Command recieved : FACTORIAL 5
+Aug 27, 2026 2:38:10 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 27, 2026 2:38:10 PM FTP_Server.program926 LogFile
+INFO: Command recieved : ADD 10 20
+Aug 27, 2026 2:38:23 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 27, 2026 2:38:23 PM FTP_Server.program926 LogFile
+INFO: Command recieved : MULTIPLY 2 3
+Aug 27, 2026 10:52:00 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 27, 2026 10:52:00 PM FTP_Server.program926 LogFile
+INFO: Command recieved : MAX 2 34
+Aug 27, 2026 10:52:54 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 27, 2026 10:52:54 PM FTP_Server.program926 LogFile
+INFO: Command recieved : MAX 23 45
+Aug 27, 2026 10:55:02 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 27, 2026 10:55:02 PM FTP_Server.program926 LogFile
+INFO: Command recieved : MIN 34 56
+Aug 27, 2026 10:57:29 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 27, 2026 10:57:29 PM FTP_Server.program926 LogFile
+INFO: Command recieved : QUIT
