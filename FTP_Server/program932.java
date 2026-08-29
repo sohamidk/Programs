@@ -3,7 +3,7 @@ package FTP_Server;
 import java.io.*;
 import java.net.*;
 
-public class program930
+public class program932
 {
     public static int ClientCount = 1;
     public static void main(String args[])
@@ -75,7 +75,7 @@ public class program930
                     break;
                     
                 }
-
+                // GET A.txt(Download)
                 if(operation.equals("GET"))
                 {
                     if(Part.length != 2)
@@ -83,8 +83,38 @@ public class program930
                         dos.writeUTF("Usage : GET <filename>");
                         continue;
                     }
-                }
+
+                    String fileName = Part[1];
+                    File file = new File(fileName);
+
+                    if(file.exists() == false || file.isFile() == false)
+                    {
+                        dos.writeUTF("File not found");
+                        continue;
+                    }
                     
+                    dos.writeUTF("File found");
+
+                    long fileSize = file.length();
+
+                    dos.writeLong(fileSize);
+
+                    FileInputStream fis = new FileInputStream(file);
+                    byte buffer[] = new byte[1024];
+
+                    int bytesread = 0;
+
+                    while((bytesread = fis.read(buffer)) != -1)
+                    {
+                        dos.write(buffer,0,bytesread);
+                    }
+
+                    dos.flush();
+                    fis.close();
+
+
+                }
+                //PUT B.txt (Upload)
                 else if(operation.equals("PUT"))
                 {
                     if(Part.length != 2)
@@ -166,7 +196,7 @@ public class program930
                     if(Part.length != 3)
                     {
                         dos.writeUTF("Usage : RENAME <Oldfilename> <Newfilename>");
-                        continue;
+                        
                     }
 
                     File oldFile = new File(Part[1]);
