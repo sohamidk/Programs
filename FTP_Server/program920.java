@@ -13,7 +13,7 @@ public class program920
 
         try
         {
-            ServerSocket serversocket = new ServerSocket(9000);
+            ServerSocket serversocket = new ServerSocket(9001);
 
             System.out.println("----------------------------------------------");
             System.out.println("---------Marvellous Client Started------------");

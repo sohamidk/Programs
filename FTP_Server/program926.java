@@ -2,41 +2,152 @@ package FTP_Server;
 
 import java.io.*;
 import java.net.*;
-import java.util.logging.FileHandler;
-import java.util.logging.Formatter;
-import java.util.logging.Logger;
-import java.util.logging.LoggingPermission;
-import java.util.logging.SimpleFormatter;
+import java.util.*;
+
 
 public class program926
 {
     public static void main(String args[])
     {
+        Scanner sobj = new Scanner(System.in);
+
         try
         {
-            ServerSocket serversocket = new ServerSocket(9001);
+            ServerSocket serversocket = new ServerSocket(9000);
 
             System.out.println("----------------------------------------------");
-            System.out.println("---------Marvellous Server Started------------");
+            System.out.println("---------Marvellous Client Started------------");
             System.out.println("----------------------------------------------");
 
-            // Loop for Multiple client request
+            Socket socket = new Socket(
+                                       "127.0.0.1",
+                                        9001
+                                        );
+            
+            System.out.println("Connection with server is successful");
+
+            DataInputStream dis = new DataInputStream(socket.getInputStream());
+
+            DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+            
+            System.out.println(dis.readUTF());
+
             while(true)
             {
-                System.out.println("Server is waiting for client request");
+                System.out.println("----------------------------------------------");
+                System.out.println("FTP commands");
+                System.out.println("----------------------------------------------");
 
-                Socket clientssocket = serversocket.accept();
-                
-                System.out.println("Client connected successfully");
 
-                // Thread gets created for client
-                Thread t = new Thread(() -> HandleClientRequest(clientssocket));
+                System.out.println("LIST");
+                System.out.println("EXISTs <filename>");
+                System.out.println("INFO <filename>");
+                System.out.println("SIZE <filename>");
+                System.out.println("GET <filename>");
+                System.out.println("PUT <filename>");
+                System.out.println("DELETE <filename>");
+                System.out.println("RENAME <oldfilename> <newfilename>");
+                System.out.println("QUIT");
 
-                t.start();
+
+                System.out.println("Enter command : ");
+
+                //RENAME Demo.txt DemoX.txt
+                String command = sobj.nextLine();
+
+                String parts[] = command.split(" ");
+
+                String operation = parts[0].toUpperCase();
+
+                if(operation.equals("GET"))
+                {
+                    if(parts.length != 2)
+                    {
+                        System.out.println("Usage : GET <filename>");
+                        continue;
+                    }
+                }
+                else if(operation.equals("PUT"))
+                {
+                    if(parts.length != 2)
+                    {
+                        System.out.println("Usage : PUT <filename>");
+                        continue;
+                    }
+                }
+                else if(operation.equals("INFO"))
+                {
+                    if(parts.length != 2)
+                    {
+                        System.out.println("Usage : INFO <filename>");
+                        continue;
+                    }
+                }
+                else if(operation.equals("SIZE"))
+                {
+                    if(parts.length != 2)
+                    {
+                        System.out.println("Usage : SIZE <filename>");
+                        continue;
+                    }
+                }
+                else if(operation.equals("EXISTS"))
+                {
+                    if(parts.length != 2)
+                    {
+                        System.out.println("Usage : EXISTS <filename>");
+                        continue;
+                    }
+                }
+                else if(operation.equals("RENAME"))
+                {
+                    if(parts.length != 3)
+                    {
+                        System.out.println("Usage : RENAME <Oldfilename> <Newfilename>");
+                        continue;
+                    }   
+                }
+                else if(operation.equals("DELETE"))
+                {
+                    if(parts.length != 2)
+                    {
+                        System.out.println("Usage : DELETE <filename>");
+                        continue;
+                    }
+                }
+                else if(operation.equals("LIST"))
+                {
+                    if(parts.length != 1)
+                    {
+                        System.out.println("Usage : LIST");
+                        continue;
+                    }
+                }
+                else if(operation.equals("QUIT"))
+                {
+                    System.out.println("Thank you for using Marvellous FTP Server");
+                    dos.writeUTF(operation);
+
+                    String response = dis.readUTF();
+                    System.out.println(response);
+
+                    //It will terminate the client loop
+                    break;
+                }
+                else 
+                {
+                    System.out.println("There is no such command");
+                    continue;
+                }
 
             }// End of while
-            
-        }
+
+            socket.close();
+            dis.close();
+            sobj.close();
+            dos.close();
+
+        }// End of try
         catch(Exception e)
         {
             System.out.println("Exception occured" + e);
@@ -44,186 +155,4 @@ public class program926
 
     }// End of main
 
-    public static void HandleClientRequest(Socket socket)
-    {
-        try
-        {
-            DataInputStream dis = new DataInputStream(socket.getInputStream());
-            DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-
-            dos.writeUTF("Connected to Marvellous server");
-            
-
-            while(true)
-            {
-                String command = dis.readUTF();
-                LogFile(socket, command);
-
-                System.out.println("Command recieved from client : " + command);
-
-                String Part[] = command.split(" ");
-
-                String operation = Part[0].toUpperCase();
-
-                if(operation.equals("QUIT"))
-                {
-                    dos.writeUTF("Disconnected from server");
-                    break;
-                }
-
-                if(Part.length != 3)
-                {
-                    dos.writeUTF("Invalid command format");
-                    continue;
-                }
-
-                double no1 = Double.parseDouble(Part[1]);
-                double no2 = Double.parseDouble(Part[2]);
-
-                double result = 0.0;
-
-                if(operation.equals("ADD"))
-                {
-                    result = no1 + no2;
-                    dos.writeUTF("Result is : " + result);
-                }
-                else if(operation.equals("SUB"))
-                {
-                    result = no1 - no2;
-                    dos.writeUTF("Result is : " + result);
-                }
-                else if(operation.equals("MULT"))
-                {
-                    result = no1 * no2;
-                    dos.writeUTF("Result is : " + result);
-                }
-                else if(operation.equals("DIV"))
-                {
-                    result = no1 / no2;
-                    dos.writeUTF("Result is : " + result);
-                }
-                else if(operation.equals("MOD"))
-                {
-                    result = no1 % no2;
-                    dos.writeUTF("Result is : " + result);
-                }
-                else if(operation.equals("MAX"))
-                {
-                    if(no1 > no2)
-                    {
-                        dos.writeUTF("Maximum Number is : " + no1);
-                    }
-                    else
-                    {
-                        dos.writeUTF("Maximum Number is : " + no2);
-                    }
-                }
-                else if(operation.equals("MIN"))
-                {
-                    if(no1 < no2)
-                    {
-                        dos.writeUTF("Minimum Number is : " + no1);
-                    }
-                    else
-                    {
-                        dos.writeUTF("Minimum Number is : " + no2);
-                    }
-                }
-                else
-                {
-                    dos.writeUTF("Invalid operation");
-                }
-
-            }// End of while
-
-            socket.close();
-
-            System.out.println("Client Disconnected.");
-        }
-
-        catch(Exception e)
-        {
-            System.out.println("Exception Error : " + e);
-        }
-    }
-
-    public static void HandleClientRequest2(Socket socket)
-    {
-        try
-        {
-            DataInputStream dis = new DataInputStream(socket.getInputStream());
-            DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-
-            while(true)
-            {
-                String Command = dis.readUTF();
-
-                String Parts[] = Command.split(" ");
-
-                String operation1 = Parts[0].toUpperCase();
-
-                if(operation1.equals("QUIT"))
-                {
-                    dos.writeUTF("Disconnected from server");
-                    break;
-                }
-
-                if(Parts.length != 2)
-                {
-                    dos.writeUTF("Invalid command format");
-                    continue;
-                }
-
-                double no = Double.parseDouble(Parts[1]);
-
-                if(operation1.equals("EVEN"))
-                {
-                    if(no % 2 == 0)
-                    {
-                        dos.writeUTF(no + " is Even number");
-                    }
-                }
-                else if(operation1.equals("ODD"))
-                {
-                    if(no % 2 != 0)
-                    {
-                        dos.writeUTF(no + " is Odd number");
-                    }
-                }
-
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println("Exception Error : "  + e);
-        }
-    }
-
-    public static void LogFile(Socket socket, String command)
-    {
-        try
-        {
-
-           Logger logger = Logger.getLogger("FTP server");
-
-           FileHandler fhobj = new FileHandler("Server.log", true);
-            fhobj.setFormatter(new SimpleFormatter());
-
-            logger.addHandler(fhobj);
-
-            System.out.println("Log of clients : ");
-
-            logger.info("Client connected : " + socket.getInetAddress());
-
-            logger.info("Command recieved : " + command);
-
-            fhobj.close();
-
-        }
-        catch(Exception e)
-        {
-            System.out.println("Exception Error : " + e);
-        }
-
-    }
 }// End of class

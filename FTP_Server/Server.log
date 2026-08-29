@@ -62,3 +62,11 @@ Aug 27, 2026 10:57:29 PM FTP_Server.program926 LogFile
 INFO: Client connected : /127.0.0.1
 Aug 27, 2026 10:57:29 PM FTP_Server.program926 LogFile
 INFO: Command recieved : QUIT
+Aug 27, 2026 11:46:30 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 27, 2026 11:46:30 PM FTP_Server.program926 LogFile
+INFO: Command recieved : EVEN 10
+Aug 27, 2026 11:47:27 PM FTP_Server.program926 LogFile
+INFO: Client connected : /127.0.0.1
+Aug 27, 2026 11:47:27 PM FTP_Server.program926 LogFile
+INFO: Command recieved : EVEN 10
