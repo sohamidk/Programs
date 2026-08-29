@@ -3,7 +3,7 @@ package FTP_Server;
 import java.io.*;
 import java.net.*;
 
-public class program928
+public class program930
 {
     public static int ClientCount = 1;
     public static void main(String args[])
@@ -159,12 +159,32 @@ public class program928
                         dos.writeUTF("File Does not exist");
                     }
                 }
+
+                // RENAME Demo.txt DemoX.txt
                 else if(operation.equals("RENAME"))
                 {
                     if(Part.length != 3)
                     {
                         dos.writeUTF("Usage : RENAME <Oldfilename> <Newfilename>");
                         continue;
+                    }
+
+                    File oldFile = new File(Part[1]);
+                    File newfile = new File(Part[2]);
+
+                    if(oldFile.exists())
+                    {
+                        dos.writeUTF("Source file does not exist");
+                        continue;
+                    }
+
+                    if(oldFile.renameTo(newfile))
+                    {
+                        dos.writeUTF("File renamed successfully");
+                    }
+                    else
+                    {
+                        dos.writeUTF("Unable to rename file");
                     }
                 }
                 else if(operation.equals("DELETE"))
@@ -174,6 +194,16 @@ public class program928
                         dos.writeUTF("Usage : DELETE <filename>");
                         continue;
                     }
+
+                    File file = new File(Part[1]);
+
+                    if(file.exists() == false)
+                    {
+                        dos.writeUTF("There is no such file");
+                        continue;
+                    }
+                    
+
                 }
                 else if(operation.equals("LIST"))
                 {
