@@ -3,7 +3,7 @@ package FTP_Server;
 import java.io.*;
 import java.net.*;
 
-public class program927
+public class program928
 {
     public static int ClientCount = 1;
     public static void main(String args[])
@@ -100,13 +100,44 @@ public class program927
                         dos.writeUTF("Usage : INFO <filename>");
                         continue;
                     }
+
+                    File file = new File(Part[1]);
+
+                    if(file.exists())
+                    {
+                        String info = "";
+
+                        info = info + "File Name : " + file.getName() + "\n";
+                        info = info + "File Size : " + file.length() +  "\n";
+                        info = info + "Readable : " + file.canRead() +  "\n";
+                        info = info + "Writable : " + file.canWrite() +  "\n";
+
+                        dos.writeUTF(info);
+
+                    }
+                    else
+                    {
+                        dos.writeUTF("File Does not exist");
+                    }
                 }
+                // SIZE Demo.txt
                 else if(operation.equals("SIZE"))
                 {
                     if(Part.length != 2)
                     {
                         dos.writeUTF("Usage : SIZE <filename>");
                         continue;
+                    }
+
+                    File file = new File(Part[1]);
+
+                    if(file.exists() && file.isFile())
+                    {
+                        dos.writeUTF("File Size is : " + file.length() + " bytes");
+                    }
+                    else
+                    {
+                        dos.writeUTF("File Does not exist");
                     }
                 }
                 else if(operation.equals("EXISTS"))
@@ -115,6 +146,17 @@ public class program927
                     {
                         dos.writeUTF("Usage : EXISTS <filename>");
                         continue;
+                    }
+
+                    File file = new File(Part[1]);
+
+                    if(file.exists() && file.isFile())
+                    {
+                        dos.writeUTF("File Exist");
+                    }
+                    else
+                    {
+                        dos.writeUTF("File Does not exist");
                     }
                 }
                 else if(operation.equals("RENAME"))
@@ -140,6 +182,30 @@ public class program927
                         dos.writeUTF("Usage :LIST");
                         continue;
                     }
+
+                    // Current directory's object
+                    File folder = new File(".");
+
+                    File files[] = folder.listFiles();
+
+                    String result = "";
+
+                    if(files != null)
+                    {
+                        for(File f : files)
+                        {
+                           if(f.isFile())
+                           {
+                                result = result + f.getName() + "\n";
+                           }
+                        }
+                    }
+                    if(files.length == 0)
+                    {
+                        result = "No files available";
+                        dos.writeUTF(result);
+                    }
+
                 }
                 else
                 {

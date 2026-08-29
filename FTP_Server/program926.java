@@ -13,8 +13,7 @@ public class program926
 
         try
         {
-            ServerSocket serversocket = new ServerSocket(9000);
-
+           
             System.out.println("----------------------------------------------");
             System.out.println("---------Marvellous Client Started------------");
             System.out.println("----------------------------------------------");
@@ -49,6 +48,7 @@ public class program926
                 System.out.println("RENAME <oldfilename> <newfilename>");
                 System.out.println("QUIT");
 
+                System.out.println("----------------------------------------------");
 
                 System.out.println("Enter command : ");
 
@@ -66,6 +66,8 @@ public class program926
                         System.out.println("Usage : GET <filename>");
                         continue;
                     }
+
+                    dos.writeUTF(command);
                 }
                 else if(operation.equals("PUT"))
                 {
@@ -74,6 +76,8 @@ public class program926
                         System.out.println("Usage : PUT <filename>");
                         continue;
                     }
+
+                    dos.writeUTF(command);
                 }
                 else if(operation.equals("INFO"))
                 {
@@ -82,6 +86,8 @@ public class program926
                         System.out.println("Usage : INFO <filename>");
                         continue;
                     }
+
+                    dos.writeUTF(command);
                 }
                 else if(operation.equals("SIZE"))
                 {
@@ -90,6 +96,8 @@ public class program926
                         System.out.println("Usage : SIZE <filename>");
                         continue;
                     }
+
+                    dos.writeUTF(command);
                 }
                 else if(operation.equals("EXISTS"))
                 {
@@ -98,6 +106,8 @@ public class program926
                         System.out.println("Usage : EXISTS <filename>");
                         continue;
                     }
+
+                    dos.writeUTF(command);
                 }
                 else if(operation.equals("RENAME"))
                 {
@@ -106,6 +116,8 @@ public class program926
                         System.out.println("Usage : RENAME <Oldfilename> <Newfilename>");
                         continue;
                     }   
+
+                    dos.writeUTF(command);
                 }
                 else if(operation.equals("DELETE"))
                 {
@@ -114,6 +126,8 @@ public class program926
                         System.out.println("Usage : DELETE <filename>");
                         continue;
                     }
+
+                    dos.writeUTF(command);
                 }
                 else if(operation.equals("LIST"))
                 {
@@ -122,6 +136,8 @@ public class program926
                         System.out.println("Usage : LIST");
                         continue;
                     }
+
+                    dos.writeUTF(command);
                 }
                 else if(operation.equals("QUIT"))
                 {
