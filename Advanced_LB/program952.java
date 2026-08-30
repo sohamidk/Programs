@@ -2,7 +2,7 @@ import java.util.*;
 
 // java program951.java programming
 
-public class program951
+public class program952
 {
     public static void main(String A[])
     {
@@ -14,7 +14,7 @@ public class program951
 
         String str = A[0];
 
-        TreeMap <Character, Integer> frequency = new TreeMap<Character, Integer>();
+        LinkedHashMap <Character, Integer> frequency = new LinkedHashMap<Character, Integer>();
 
         for(char ch : str.toCharArray())
         {
@@ -23,7 +23,7 @@ public class program951
 
         System.out.println(frequency);
 
-        // Issue in ordering
+        
 
     }
 }

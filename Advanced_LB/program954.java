@@ -2,7 +2,7 @@ import java.util.*;
 
 // java program951.java programming
 
-public class program951
+public class program954
 {
     public static void main(String A[])
     {
@@ -14,16 +14,19 @@ public class program951
 
         String str = A[0];
 
-        TreeMap <Character, Integer> frequency = new TreeMap<Character, Integer>();
+        LinkedHashMap <Character, Integer> frequency = new LinkedHashMap<Character, Integer>();
 
         for(char ch : str.toCharArray())
         {
             frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
         }
 
-        System.out.println(frequency);
-
-        // Issue in ordering
-
+        for(Map.Entry<Character, Integer> ch : frequency.entrySet())
+        {
+            if(frequency.get(ch) == 1)
+            {
+                System.out.println("First non-repeating character" + ch);
+            }  
+        }  
     }
 }

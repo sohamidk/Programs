@@ -1,6 +1,6 @@
 import java.util.*;
 
-// java program949.java 10 11
+// java program950.java 10 11
 
 public class program950
 {
