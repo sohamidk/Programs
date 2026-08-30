@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class program959
+public class program961
 {
     public static void main(String A[])
     {
@@ -9,10 +9,12 @@ public class program959
         HashSet <String> unique = new HashSet<String>();
         HashSet <String> duplicate = new HashSet<String>();
 
+        boolean bRet = false;
         for(String str : transactions)
         {
-            if(!unique.add(str))
-            {
+            bRet = unique.add(str) ;
+            if(bRet == false)
+            {   
                 duplicate.add(str);
             }
         }

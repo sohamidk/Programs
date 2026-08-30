@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class program959
+public class program960
 {
     public static void main(String A[])
     {
@@ -11,7 +11,10 @@ public class program959
 
         for(String str : transactions)
         {
-            if(!unique.add(str))
+            if(unique.add(str))
+            {     
+            }
+            else
             {
                 duplicate.add(str);
             }
