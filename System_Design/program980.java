@@ -1,3 +1,5 @@
+// Factory System Design Pattern
+
 enum VehicleType
 {
     BIKE,
@@ -61,16 +63,38 @@ class Truck extends Vehicle
     }
 }
 
-class program977
+class VehicleFactory
+{
+    public static Vehicle createVehicle(VehicleType type, String number)
+    {
+        switch(type)
+        {
+            case BIKE : 
+                return new Bike(number);
+
+            case CAR : 
+                return new Car(number);
+
+            case TRUCK : 
+                return new Truck(number);
+
+            default : 
+                throw new IllegalArgumentException("INVALID VEHICLE TYPE");
+        }
+
+    }
+}
+
+class program980
 {
     public static void main(String[] args) 
     {
-        Car cobj = new Car("MH12VL9080");
+       Vehicle v1 = VehicleFactory.createVehicle(VehicleType.BIKE,"MH12VL9080");
+       Vehicle v2 = VehicleFactory.createVehicle(VehicleType.CAR,"MH12WV9080");
+       Vehicle v3 = VehicleFactory.createVehicle(VehicleType.TRUCK,"MH12ML9080");
 
-        cobj.display();
-
-        Truck tobj = new Truck("MH12WZ9080");
-
-        tobj.display();
+       v1.display();
+       v2.display();
+       v3.display();
     }
 }
