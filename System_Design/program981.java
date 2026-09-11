@@ -2,6 +2,7 @@
 class ParkingLot
 {
     private static ParkingLot instance;
+
     private ParkingLot()
     {
         System.out.println("ParkingLot object gets created");
@@ -18,13 +19,14 @@ class ParkingLot
     }
 }
 
-class program974
+class program981
 {
     public static void main(String[] args) 
     {
         ParkingLot pobj1 = ParkingLot.getInstance();
-        ParkingLot pobj2 = ParkingLot.getInstance();
 
-        System.out.println(pobj1 == pobj2);
+        ParkingLot pobj2 = ParkingLot.getInstance();
+        
+        ParkingLot pobj3 = ParkingLot.getInstance();
     }
 }
