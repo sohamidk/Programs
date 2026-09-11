@@ -15,13 +15,24 @@ class ParkingTicket
         this.entryTime = e;
     }
 
+    public void display()
+    {
+        System.out.println("Ticket Number : " + this.ticketNumber);
+        System.out.println("Vehicle Number : " + this.vehicleNumber);
+        System.out.println("Floor Number: " + this.floorNumber);
+        System.out.println("Spot Number : " + this.spotNumber);
+        System.out.println("Entry Time: " + this.entryTime);
+    }
 }
 
-class program984
+class program985
 {
     public static void main(String[] args) 
     {
         ParkingTicket p1 = new ParkingTicket(11,"MH12 VL7172",3,89,"9:30 AM");
         ParkingTicket p2 = new ParkingTicket(12,"MH14 VL7020",4,32,"9:50 AM");
+
+        p1.display();
+        p2.display();
     }
 }
