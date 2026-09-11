@@ -1,10 +1,10 @@
 class ParkingTicket
 {
-    public int ticketNumber;
-    public String vehicleNumber;
-    public int floorNumber;
-    public int spotNumber;
-    public String entryTime;
+    private int ticketNumber;
+    private String vehicleNumber;
+    private int floorNumber;
+    private int spotNumber;
+    private String entryTime;
     
     public ParkingTicket(int a, String b, int c, int d, String e)
     {
@@ -17,7 +17,7 @@ class ParkingTicket
 
 }
 
-class program983 
+class program984
 {
     public static void main(String[] args) 
     {
