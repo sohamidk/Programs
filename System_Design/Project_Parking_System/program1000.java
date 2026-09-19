@@ -7,7 +7,7 @@ package Project_Parking_System;
     step 2 : Vehicle Hierarchy creation
     step 3 : VahicleFactory creation (Factory Pattern)
     step 4 : ParkingSlot Hierarchy
-    step 5 : ParkingObserver
+    step 5 : ParkingObserver class
     step 6 : ParkingFloor class
     step 7 : Parking DisplayBoard (Observer Pattern)
     step 8 : ParkingStrategy Class (Strategy Pattern)
@@ -349,7 +349,36 @@ class TruckSpot extends ParkingSpot
         }
     }
 }
-class program999
+
+/////////////////////////////////////////////////////////////
+//
+//  Step 5 : ParkingObserver Class
+//  It is used to automatically update displayBoard when the
+//  parking availability changes
+//
+// Concepts : Observer Design Pattern
+//
+/////////////////////////////////////////////////////////////
+
+interface ParkingObserver
+{
+    void update();
+}
+
+/////////////////////////////////////////////////////////////
+//
+//  Step 6 : ParkingFloor Class
+//  It is used to manage parking floor
+//
+// Concepts : Composition, ArrayList, Object Management
+//
+/////////////////////////////////////////////////////////////
+
+class ParkingFloor
+{
+    
+}
+class program1000
 {
     public static void main(String A[]) 
     {
