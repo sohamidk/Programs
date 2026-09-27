@@ -447,8 +447,76 @@ class ParkingFloor
         // notify all observers about the availability
         notifyObservers();
     }
+
+    public int getAvailaibleCount(SpotType type)
+    {
+        int count = 0;
+
+        for(ParkingSpot spot : parkingSpots)
+        {
+            if(spot.getSpotType() == type && !spot.isOccupied())
+            {
+                count++;
+            } 
+        }
+
+        return count;
+    }
+
+    // display all parking spots on specific floor
+    public void displayFloor()
+    {
+        System.out.println();
+
+        System.out.println("Floor : " + floorNumber);
+
+        for(ParkingSpot spot : parkingSpots)
+        {
+            spot.display();
+        }
+    }
 }
-class program1002
+
+/////////////////////////////////////////////////////////////
+// Step 7 : Create ParkingDisplayBoard Class 
+// It is used to create a class which displays the parking 
+// status
+// Subject --> ParkingFloor
+// Observer --> ParkingDisplayBoard
+//
+//
+// Note : Any observer is going to observ the subject
+// There will be multiple observers for one subject
+// Concepts : Observer design pattern
+/////////////////////////////////////////////////////////////
+
+
+class ParkingDisplayBoard implements ParkingObserver
+{
+    // Floor whose availability is displayed by this board
+    private ParkingFloor floor;
+
+    // Parameterized constructor
+    public ParkingDisplayBoard(ParkingFloor floor)
+    {
+        this.floor = floor;
+    }
+
+    // Automatically called whenever floor availability changes
+    @Override 
+    public void update()
+    {
+        System.err.println();
+        System.out.println("---------- Display Board -------------");
+
+        
+
+        System.out.println("--------------------------------------");
+        System.out.println();
+    }
+}
+
+class program1004
 {
     public static void main(String A[]) 
     {

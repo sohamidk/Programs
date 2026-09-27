@@ -447,8 +447,36 @@ class ParkingFloor
         // notify all observers about the availability
         notifyObservers();
     }
+
+    public int getAvailaibleCount(SpotType type)
+    {
+        int count = 0;
+
+        for(ParkingSpot spot : parkingSpots)
+        {
+            if(spot.getSpotType() == type && !spot.isOccupied())
+            {
+                count++;
+            } 
+        }
+
+        return count;
+    }
+
+    // display all parking spots on specific floor
+    public void displayFloor()
+    {
+        System.out.println();
+
+        System.out.println("Floor : " + floorNumber);
+
+        for(ParkingSpot spot : parkingSpots)
+        {
+            spot.display();
+        }
+    }
 }
-class program1002
+class program1003
 {
     public static void main(String A[]) 
     {
