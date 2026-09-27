@@ -418,10 +418,10 @@ class ParkingFloor
 
     public ParkingSpot findAvailableSpot()
     {
-        
+        return null;
     }
 }
-class program1000
+class program1001
 {
     public static void main(String A[]) 
     {

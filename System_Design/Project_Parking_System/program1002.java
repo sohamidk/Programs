@@ -416,12 +416,13 @@ class ParkingFloor
 
     }
 
-    public ParkingSpot findAvailableSpot()
+    // Method is going to search parking spot for specific type of vehicle
+    public ParkingSpot findAvailableSpot(Vehicle vehicle)
     {
-        
+    
     }
 }
-class program1000
+class program1002
 {
     public static void main(String A[]) 
     {
