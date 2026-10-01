@@ -1204,7 +1204,7 @@ class ParkingLot
 
 */
 
-class program1014
+class program1015
 {
     public static void main(String A[]) throws Exception
     {
@@ -1227,7 +1227,15 @@ class program1014
         /// 
         ///////////////////////////////////////////////////
 
+        // Add First floor
+
         ParkingFloor floor1 = new ParkingFloor(1);
+
+        ///////////////////////////////////////////////////
+        ///  Step 3
+        ///  Create multiple spots
+        /// 
+        ///////////////////////////////////////////////////
 
         floor1.addParkingSpot(new BikeSpot(101));
         floor1.addParkingSpot(new BikeSpot(102));
@@ -1237,9 +1245,47 @@ class program1014
 
         floor1.addParkingSpot(new TruckSpot(105));
         floor1.addParkingSpot(new TruckSpot(106));
-
         
+        ///////////////////////////////////////////////////
+        ///  Step 4
+        ///  Create Display board
+        /// 
+        ///////////////////////////////////////////////////
 
+        ParkingDisplayBoard board1 = new ParkingDisplayBoard(floor1);
+
+        // Register the display board with observer
+        floor1.addObserver(board1);
+
+        // Add Second floor
+
+        ParkingFloor floor2 = new ParkingFloor(2);
+
+        ///////////////////////////////////////////////////
+        ///  Step 3
+        ///  Create multiple spots
+        /// 
+        ///////////////////////////////////////////////////
+
+        floor2.addParkingSpot(new BikeSpot(201));
+        floor2.addParkingSpot(new BikeSpot(202));
+
+        floor2.addParkingSpot(new CarSpot(203));
+        floor2.addParkingSpot(new CarSpot(204));
+
+        floor2.addParkingSpot(new TruckSpot(205));
+        floor2.addParkingSpot(new TruckSpot(206));
+        
+        ///////////////////////////////////////////////////
+        ///  Step 4
+        ///  Create Display board
+        /// 
+        ///////////////////////////////////////////////////
+
+        ParkingDisplayBoard board2 = new ParkingDisplayBoard(floor2);
+
+        // Register the display board with observer
+        floor2.addObserver(board2);
 
 
     } 
