@@ -632,7 +632,49 @@ class WeekendPricingStrategy implements PricingStrategy
 
 }
 
-class program1006
+/////////////////////////////////////////////////////////////
+// Step 10 : Create PaymentStrategy Class 
+// It is used to create a class PricingStrategy
+// It keeps the pricing algorithm independent of exit logic
+//
+// Concepts : Strategy design pattern
+/////////////////////////////////////////////////////////////
+
+interface PaymentStrategy
+{
+    void Pay(double amount);
+}
+
+class UPIpayment implements PaymentStrategy
+{
+    @Override
+    public void Pay(double amount)
+    {
+        System.out.println("UPI Payment successful : Rs. " + amount);
+    }
+}
+
+class Cardpayment implements PaymentStrategy
+{
+    @Override
+    public void Pay(double amount)
+    {
+        System.out.println("Card Payment successful : Rs. " + amount);
+    }
+}
+
+class Cashpayment implements PaymentStrategy
+{
+    @Override
+    public void Pay(double amount)
+    {
+        System.out.println("Cash Payment successful : Rs. " + amount);
+    }
+}
+
+
+
+class program1007
 {
     public static void main(String A[]) 
     {

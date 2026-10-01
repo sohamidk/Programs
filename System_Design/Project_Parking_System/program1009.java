@@ -532,7 +532,7 @@ class ParkingDisplayBoard implements ParkingObserver
 
 
 /////////////////////////////////////////////////////////////
-// Step 7 : Create ParkingStrategy Class 
+// Step 8 : Create ParkingStrategy Class 
 // It is used to create a class ParkingStrategy which is 
 // responsible to decide the parking spot selection
 //
@@ -632,7 +632,226 @@ class WeekendPricingStrategy implements PricingStrategy
 
 }
 
-class program1006
+/////////////////////////////////////////////////////////////
+// Step 10 : Create PaymentStrategy Class 
+// It is used to create a class PricingStrategy
+// It keeps the pricing algorithm independent of exit logic
+//
+// Concepts : Strategy design pattern
+/////////////////////////////////////////////////////////////
+
+interface PaymentStrategy
+{
+    void Pay(double amount);
+}
+
+class UPIpayment implements PaymentStrategy
+{
+    @Override
+    public void Pay(double amount)
+    {
+        System.out.println("UPI Payment successful : Rs. " + amount);
+    }
+}
+
+class Cardpayment implements PaymentStrategy
+{
+    @Override
+    public void Pay(double amount)
+    {
+        System.out.println("Card Payment successful : Rs. " + amount);
+    }
+}
+
+class Cashpayment implements PaymentStrategy
+{
+    @Override
+    public void Pay(double amount)
+    {
+        System.out.println("Cash Payment successful : Rs. " + amount);
+    }
+}
+
+/////////////////////////////////////////////////////////////
+// Step 11 : Create ParkingTicket Class 
+// It is used to represent one complete parking transaction
+/////////////////////////////////////////////////////////////
+
+class ParkingTicket
+{
+    // Used for generating unique ticket number
+    private static int counter = 1000;
+
+    // Ticket number for unique ticket
+    private int ticketNumber;
+
+    // Vehicle assosiated with that ticket
+    private Vehicle vehicle;
+
+    // Floor on which the vehicle is parked
+    private ParkingFloor floor;
+
+    // Actual spot on which vehicle is parked
+    private ParkingSpot spot;
+
+    // Time at which vehicle entered in parking floor
+    private LocalDateTime entryTime;
+
+    // Time at which vehicle exited from parking floor
+    private LocalDateTime exitTime;
+
+    // It maintains the status of the ticket
+    private TicketStatus status;
+
+    public ParkingTicket(
+                            Vehicle vehicle,
+                            ParkingFloor floor,
+                            ParkingSpot spot
+                        )
+    {
+        this.ticketNumber = ++counter;
+        this.vehicle = vehicle;
+        this.floor = floor;
+        this.spot = spot;
+        this.entryTime = LocalDateTime.now();
+        this.status = TicketStatus.ACTIVE;
+    }
+
+    // Getter method for ticket Number
+    public int getTicketNumber()
+    {
+        return this.ticketNumber;
+    }
+
+    // Getter method for vehicle
+    public Vehicle getVehicle()
+    {
+        return this.vehicle;
+    }
+
+    // Getter method for floor
+    public ParkingFloor getFloor()
+    {
+        return this.floor;
+    }
+
+    // Getter method for spot
+    public ParkingSpot getSpot()
+    {
+        return this.spot;
+    }
+
+    // Getter method for entryTime
+    public LocalDateTime getEntryTime()
+    {
+        return this.entryTime;
+    }
+
+    // Getter method for entryTime
+    public LocalDateTime getExitTime()
+    {
+        return this.exitTime;
+    }
+
+    // Getter method for ticket status
+    public TicketStatus gTicketStatus()
+    {
+        return this.status;
+    }
+
+    // Method is called when vehicle is going out
+    public void closeTicket()
+    {
+        this.exitTime = LocalDateTime.now();
+
+        this.status = TicketStatus.CLOSED;
+    }
+
+    // Calculate the total number of hours 
+    public long calculateHours()
+    {
+        LocalDateTime endtime;
+
+        if(exitTime == null)
+        {
+            endtime = LocalDateTime.now();
+        }
+        else
+        {
+            endtime = exitTime;
+        }
+
+        // Calculate the actuale time 
+        long minutes = Duration.between(entryTime , endtime).toMinutes();
+
+        // Converts minutes to hours
+        long hours = minutes / 60;
+
+        if(minutes % 60 != 0)
+        {
+            hours++;
+        }
+
+        if(hours == 0)
+        {
+            hours = 1;
+        }
+
+        return hours;
+    }
+
+    public void displayTicket()
+    {
+        System.out.println("----------------------------------");
+        System.out.println("---------Parking Ticket-----------");
+        System.out.println("----------------------------------");
+
+        System.out.println("Ticket Number : " + this.ticketNumber);
+        System.out.println("Vehicle Number : " + this.vehicle.getVehicleNumber());
+        System.out.println("Vehicle Type : " + this.vehicle.getVehicleType());
+        System.out.println("Floor Number : " + this.floor.getFloorNumber());
+        System.out.println("Spot Number : " + this.spot.getSpotNumber());
+        System.out.println("Entry Time : " + this.entryTime);
+        System.out.println("Status : " + this.status);
+
+
+        System.out.println("----------------------------------");
+    }
+}
+
+/////////////////////////////////////////////////////////////
+// Step 12 : Create EntryGate Class 
+// It is used to handle entry of a vehicle and its ticket
+// generation
+/////////////////////////////////////////////////////////////
+
+
+class EntryGate
+{
+    private int gateNumber;
+
+    public EntryGate(int gateNumber)
+    {
+        this.gateNumber = gateNumber;
+    }
+
+    public int getGateNumber()
+    {
+        return this.gateNumber;
+    }
+
+    // It generates the new parking ticket when 
+    // vehicle enters
+    public ParkingTicket generateTicket(Vehicle vehicle, ParkingFloor floor, ParkingSpot spot)
+    {
+        System.out.println("Vehicle entering from gate : " + this.gateNumber);
+
+        // New parking ticket gets generated for the vehicle
+        return new ParkingTicket(vehicle, floor, spot);     // Anonymus object
+    }
+}
+
+class program1009
 {
     public static void main(String A[]) 
     {
