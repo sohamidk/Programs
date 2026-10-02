@@ -1204,7 +1204,7 @@ class ParkingLot
 
 */
 
-class program1016
+class program1017
 {
     public static void main(String A[]) throws Exception
     {
@@ -1306,7 +1306,159 @@ class program1016
 
         ExitGate exitGate = new ExitGate(1);
 
+        ////////////////////////////////////////////////////
+        ///  Step 8
+        ///  Display MENU
+        /// 
+        ///////////////////////////////////////////////////
+
+        int choice = 0;
+
+        while(true)
+        {
+            System.out.println("-------------------------------------------");
+            System.out.println("--------||Marvellous ParkEngine||----------");
+            System.out.println("-------------------------------------------");
+
+            System.out.println("1 : Park Vehicle ");
+            System.out.println("2 : Exit Vehicle ");
+            System.out.println("3 : Search Vehicle ");
+            System.out.println("4 : Display Parking Lot");
+            System.out.println("5 : Exit");
+
+
+            System.out.println("Enter your choice : ");
+
+            choice = sobj.nextInt();
+
+            try
+            {
+                switch (choice) {
+                    case 1:
+                        {
+                            System.out.println();
+                            System.out.println("Select vehicle type : ");
+
+                            System.out.println("1 : Bike ");
+                            System.out.println("2 : Car ");
+                            System.out.println("3 : Truck ");
+
+                            int type = sobj.nextInt();
+
+                            System.out.println("Enter Vehicle Number : ");
+
+                            String number = sobj.next();
+
+                            Vehicle vehicle;
+
+                            // Factory pattern is used
+
+                            switch(type)
+                            {
+                                case 1 : // BIKE
+                                    vehicle = VehicleFactory.creatVehicle(VehicleType.BIKE, number);
+                                    break;
+                                case 2 : // CAR
+                                    vehicle = VehicleFactory.creatVehicle(VehicleType.CAR, number);
+                                    break;
+                                case 3 : // TRUCK
+                                    vehicle = VehicleFactory.creatVehicle(VehicleType.TRUCK, number);
+                                    break;
+                                default : 
+                                    System.err.println("Invalid type of vehicle");
+                                    continue;
+                            }
+
+                            // Park the vehicle and generate the ticket
+                            ParkingTicket parkingTicket = parkingLot.parkVehicle(vehicle, entryGate);
+
+                            // Display generated ticket
+                            parkingTicket.displayTicket();
+                            
+                        }// End of case 1
+                        
+                    case 2: //Exit Vehicle
+                        {
+                            
+                            System.out.println("Enter ticket number : ");
+
+                            int ticketNumber = sobj.nextInt();
+
+                            System.out.println();
+
+                            System.out.println("Enter the payment option : ");
+
+                            System.out.println("1 : Cash ");
+                            System.out.println("2 : UPI ");
+                            System.out.println("3 : Card ");
+
+                            int paymentType = sobj.nextInt();
+                            PaymentStrategy paymentStrategy;
+                            switch(paymentType)
+                            {
+                                case 1 : // Cash
+                                    paymentStrategy = new Cashpayment();
+                                    break;
+                                case 2 : // UPI
+                                    paymentStrategy = new UPIpayment();
+                                    break;
+                                case 3 : // Card
+                                    paymentStrategy = new Cardpayment();
+                                    break;
+                                default : 
+                                    System.out.println("Invalid payment option");
+                                    continue;
+                            }
+
+                        }// End of payment switch
+                        
+                    case 3: // Search vehicle
+                        {
+                            System.out.println("Enter vehicle number : ");
+                            String vehicleNumber = sobj.next();
+
+                            ParkingTicket ticket = parkingLot.searchVehicle(vehicleNumber);
+
+                            if(ticket == null)
+                            {
+                                System.out.println("This vehicle is not parked");
+                            }
+                            else
+                            {
+                                ticket.displayTicket();
+                            }
+
+                            break;
+                        }
+                        
+                    case 4: // Display parking lot
+                       {
+                            parkingLot.displayParkingLot();
+                            break;
+                       }
+                    case 5:
+                        {
+                            System.out.println("Thank you for using Marvellous park Engine");
+                            sobj.close();
+
+                            return;
+                        }
+                        
+                    default:
+                        {
+                            System.out.println("Invalid Option");
+                        }
+                }// End of switch
+
+            }// End of try
+
+            catch(Exception eobj)
+            {
+                System.out.println("Exception Occured : " + eobj);
+            }
+
+        }// End of while
         
-    } 
+    }// End of main
 
 }// End of main class
